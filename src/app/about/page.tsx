@@ -1,7 +1,7 @@
 // src/app/about/page.tsx
 import Image from 'next/image';
 import Link from 'next/link';
-import { Award, CheckCircle, GraduationCap, Trophy } from 'lucide-react';
+import { CheckCircle, GraduationCap, Trophy } from 'lucide-react';
 
 export default function AboutPage() {
   const education = [
