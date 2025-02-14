@@ -1,7 +1,7 @@
 // src/app/page.tsx
 import Image from 'next/image';
 import Link from 'next/link';
-import { Dumbbell, Users, Apple, Shield, Notebook } from 'lucide-react';
+import { Dumbbell, Users, Shield, Notebook } from 'lucide-react';
 
 export default function Home() {
   const services = [

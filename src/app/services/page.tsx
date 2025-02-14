@@ -1,8 +1,15 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
+interface Service {
+  title: string;
+  description: string;
+  image: string;
+  features: string[];
+}
+
 // ServiceCard Component (Modular)
-const ServiceCard = ({ service }: { service: any }) => {
+const ServiceCard = ({ service }: { service: Service }) => {
   return (
     <div className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
       {/* Image Container */}
