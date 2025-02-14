@@ -1,7 +1,7 @@
 // src/app/page.tsx
 import Image from 'next/image';
 import Link from 'next/link';
-import { Dumbbell, Users, Apple, Shield } from 'lucide-react';
+import { Dumbbell, Users, Apple, Shield, Notebook } from 'lucide-react';
 
 export default function Home() {
   const services = [
@@ -16,9 +16,9 @@ export default function Home() {
       icon: <Users className="w-6 h-6" />
     },
     {
-      title: 'Ernährungsberatung',
-      description: 'Individuelle Ernährungspläne für optimale Ergebnisse.',
-      icon: <Apple className="w-6 h-6" />
+      title: 'Trainingsplanung',
+      description: 'IProfessionelle Erstellung von individuellen Trainingsplänen für Ihre Ziele.',
+      icon: <Notebook className="w-6 h-6" />
     },
     {
       title: 'Selbstverteidigung',

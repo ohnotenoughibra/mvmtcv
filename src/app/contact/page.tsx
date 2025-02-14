@@ -64,16 +64,6 @@ export default function ContactPage() {
                 </div>
               </div>
             </div>
-
-            {/* Opening Hours */}
-            <div className="mt-12">
-              <h2 className="text-2xl font-bold mb-6">Öffnungszeiten</h2>
-              <div className="space-y-2 text-gray-600">
-                <p>Montag - Freitag: 06:00 - 22:00</p>
-                <p>Samstag: 08:00 - 18:00</p>
-                <p>Sonntag: 09:00 - 14:00</p>
-              </div>
-            </div>
           </div>
 
           {/* Contact Form */}
@@ -102,6 +92,18 @@ export default function ContactPage() {
                   id="email"
                   name="email"
                   required
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-600 focus:border-transparent"
+                />
+              </div>
+
+              <div>
+                <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">
+                  Telefon
+                </label>
+                <input
+                  type="tel"
+                  id="phone"
+                  name="phone"
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-600 focus:border-transparent"
                 />
               </div>

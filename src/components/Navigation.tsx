@@ -1,9 +1,9 @@
-// src/components/Navigation.tsx
 'use client';
 
 import Link from 'next/link';
 import { useState } from 'react';
 import { Menu, X } from 'lucide-react';
+import Image from 'next/image'; // Import the Image component
 
 export default function Navigation() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -21,8 +21,14 @@ export default function Navigation() {
       <div className="max-w-6xl mx-auto px-4">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
-          <Link href="/" className="text-xl font-bold text-red-600">
-            Movement Cave
+          <Link href="/" className="flex items-center">
+            <Image
+              src="/images/logo.png" // Path to your logo in the public folder
+              alt="Movement Cave Logo"
+              width={64} // Adjust width as needed
+              height={15} // Adjust height as needed
+              className="object-contain"
+            />
           </Link>
 
           {/* Desktop Menu */}

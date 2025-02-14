@@ -57,7 +57,7 @@ export default function Footer() {
               className="flex items-center space-x-2 text-gray-400 hover:text-red-500 transition-colors"
             >
               <Instagram size={20} />
-              <span>@movementcave</span>
+              <span>@movementcave_training</span>
             </a>
           </div>
         </div>
