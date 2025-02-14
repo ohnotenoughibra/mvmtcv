@@ -51,7 +51,7 @@ export default function Footer() {
           <div>
             <h3 className="text-xl font-bold mb-4">Social Media</h3>
             <a 
-              href="https://instagram.com/movementcave" 
+              href="https://instagram.com/movementcave_training" 
               target="_blank" 
               rel="noopener noreferrer" 
               className="flex items-center space-x-2 text-gray-400 hover:text-red-500 transition-colors"
