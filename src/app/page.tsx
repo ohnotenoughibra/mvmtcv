@@ -1,101 +1,172 @@
-import Image from "next/image";
+// src/app/page.tsx
+import Image from 'next/image';
+import Link from 'next/link';
+import { Dumbbell, Users, Apple, Shield } from 'lucide-react';
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+  const services = [
+    {
+      title: 'Personal Training',
+      description: 'Individuelles Training, maßgeschneidert auf Ihre Ziele.',
+      icon: <Dumbbell className="w-6 h-6" />
+    },
+    {
+      title: 'Gruppentraining',
+      description: 'Motivierendes Training in der Gruppe.',
+      icon: <Users className="w-6 h-6" />
+    },
+    {
+      title: 'Ernährungsberatung',
+      description: 'Individuelle Ernährungspläne für optimale Ergebnisse.',
+      icon: <Apple className="w-6 h-6" />
+    },
+    {
+      title: 'Selbstverteidigung',
+      description: 'Effektive Techniken für mehr Sicherheit.',
+      icon: <Shield className="w-6 h-6" />
+    }
+  ];
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+  return (
+    <main className="min-h-screen">
+      {/* Hero Section */}
+      <div className="relative h-[150vh]">
+        <Image
+          src="/images/hero.jpg"
+          alt="Movement Cave Hero"
+          fill
+          priority
+          className="object-cover"
+        />
+        <div className="absolute inset-0 bg-black/50" />
+        
+        {/* Hero Content */}
+        <div className="relative pt-32 flex items-start justify-center">
+          <div className="text-center text-white px-4">
+            <h1 className="text-5xl md:text-7xl font-bold mb-6">
+              Movement Cave
+            </h1>
+            <p className="text-xl md:text-2xl mb-8">
+              Professionelles Training im Herzen des Stubaitals
+            </p>
+            <Link 
+              href="/contact#contact-form"
+              className="inline-block bg-red-600 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-red-700 transition-all"
+            >
+              Kostenlose Probestunde
+            </Link>
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+      </div>
+
+      {/* Services Section */}
+      <div className="bg-white py-20">
+        <div className="max-w-6xl mx-auto px-4">
+          <h2 className="text-3xl font-bold mb-12 text-center">
+            Unsere Leistungen
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {services.map((service, index) => (
+              <div key={index} className="bg-gray-50 p-6 rounded-lg hover:shadow-lg transition-shadow">
+                <div className="flex items-center mb-4">
+                  <div className="bg-red-100 p-3 rounded-lg">
+                    {service.icon}
+                  </div>
+                  <h3 className="text-xl font-semibold ml-3">{service.title}</h3>
+                </div>
+                <p className="text-gray-600">{service.description}</p>
+              </div>
+            ))}
+          </div>
+          <div className="text-center mt-12">
+            <Link 
+              href="/services"
+              className="inline-block bg-red-600 text-white px-6 py-3 rounded-lg hover:bg-red-700 transition-all"
+            >
+              Alle Leistungen ansehen
+            </Link>
+          </div>
+        </div>
+      </div>
+
+      {/* About Section */}
+      <div className="bg-gray-50 py-20">
+        <div className="max-w-6xl mx-auto px-4">
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            <div className="relative h-[400px] rounded-lg overflow-hidden">
+              <Image
+                src="/images/about-gym.jpg"
+                alt="Movement Cave Gym"
+                fill
+                className="object-cover"
+              />
+            </div>
+            <div>
+              <h2 className="text-3xl font-bold mb-6">
+                Willkommen bei Movement Cave
+              </h2>
+              <p className="text-gray-600 mb-6">
+                Im Herzen des Stubaitals bieten wir professionelles Training in einer 
+                motivierenden Atmosphäre. Unser erfahrenes Team unterstützt Sie dabei, 
+                Ihre persönlichen Fitnessziele zu erreichen.
+              </p>
+              <Link 
+                href="/about"
+                className="inline-block bg-red-600 text-white px-6 py-3 rounded-lg hover:bg-red-700 transition-all"
+              >
+                Mehr über uns
+              </Link>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* CTA Section */}
+      <div className="bg-gradient-to-r from-black to-red-800 text-white py-20">
+        <div className="max-w-6xl mx-auto px-4 text-center">
+          <h2 className="text-3xl md:text-4xl font-bold mb-8">
+            Bereit für den nächsten Schritt?
+          </h2>
+          <p className="text-xl mb-8 max-w-2xl mx-auto">
+            Starten Sie Ihre Fitness-Journey mit einem kostenlosen Erstgespräch.
+          </p>
+          <Link 
+            href="/contact#contact-form"
+            className="inline-block bg-white text-red-600 px-8 py-4 rounded-lg text-lg font-semibold hover:bg-gray-100 transition-all"
+          >
+            Jetzt Termin vereinbaren
+          </Link>
+        </div>
+      </div>
+
+      {/* Gallery Preview */}
+      <div className="bg-white py-20">
+        <div className="max-w-6xl mx-auto px-4">
+          <h2 className="text-3xl font-bold mb-12 text-center">
+            Einblicke in unser Studio
+          </h2>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            {[1, 2, 3, 4].map((num) => (
+              <div key={num} className="relative aspect-square rounded-lg overflow-hidden">
+                <Image
+                  src={`/images/gallery/gym-${num}.jpg`}
+                  alt={`Gym Preview ${num}`}
+                  fill
+                  className="object-cover hover:scale-105 transition-transform duration-300"
+                />
+              </div>
+            ))}
+          </div>
+          <div className="text-center mt-12">
+            <Link 
+              href="/gallery"
+              className="inline-block bg-red-600 text-white px-6 py-3 rounded-lg hover:bg-red-700 transition-all"
+            >
+              Galerie ansehen
+            </Link>
+          </div>
+        </div>
+      </div>
+    </main>
   );
 }
