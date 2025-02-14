@@ -1,4 +1,3 @@
-// src/app/page.tsx
 import Image from 'next/image';
 import Link from 'next/link';
 import { Dumbbell, Users, Shield, Notebook } from 'lucide-react';
@@ -17,7 +16,7 @@ export default function Home() {
     },
     {
       title: 'Trainingsplanung',
-      description: 'IProfessionelle Erstellung von individuellen Trainingsplänen für Ihre Ziele.',
+      description: 'Professionelle Erstellung von individuellen Trainingsplänen für Ihre Ziele.',
       icon: <Notebook className="w-6 h-6" />
     },
     {
@@ -30,13 +29,22 @@ export default function Home() {
   return (
     <main className="min-h-screen">
       {/* Hero Section */}
-      <div className="relative h-[150vh]">
+      <div className="relative h-[80vh] md:h-[150vh]">
+        {/* Mobile Hero Image */}
         <Image
-          src="/images/hero.jpg"
+          src="/images/hero-mobile.jpg" // Smaller image for mobile
           alt="Movement Cave Hero"
           fill
           priority
-          className="object-cover"
+          className="object-cover md:hidden"
+        />
+        {/* Desktop Hero Image */}
+        <Image
+          src="/images/hero-desktop.jpg" // Larger image for desktop
+          alt="Movement Cave Hero"
+          fill
+          priority
+          className="object-cover hidden md:block"
         />
         <div className="absolute inset-0 bg-black/50" />
         
