@@ -42,7 +42,7 @@ export default function Footer() {
             <h3 className="text-xl font-bold mb-4">Kontakt</h3>
             <ul className="space-y-2 text-gray-400">
               <li>Stubaital, Österreich</li>
-              <li>info@movementcave.at</li>
+              <li>movementcave123@gmail.com</li>
               <li>+43 123 456 789</li>
             </ul>
           </div>

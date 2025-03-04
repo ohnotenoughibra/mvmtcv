@@ -24,7 +24,7 @@ export default function DatenschutzPage() {
             6167 Stubaital<br />
             Österreich<br /><br />
             Telefon: +43 664 1234567<br />
-            E-Mail: info@movementcave.at
+            E-Mail: movementcave123@gmail.com
           </p>
         </section>
 

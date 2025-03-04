@@ -78,7 +78,7 @@ export default function ContactPage() {
                 <Mail className="w-6 h-6 text-red-600 mt-1" />
                 <div>
                   <h3 className="font-semibold">Email</h3>
-                  <p className="text-gray-600">info@movementcave.at</p>
+                  <p className="text-gray-600">movementcave123@gmail.com</p>
                 </div>
               </div>
 
