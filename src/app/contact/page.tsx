@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Mail, Phone, MapPin } from 'lucide-react';
+import { Mail, Phone, MapPin, MessageCircle } from 'lucide-react';
 
 export default function ContactPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -29,7 +29,7 @@ export default function ContactPage() {
             Kontaktieren Sie uns
           </h1>
           <p className="text-xl text-gray-200 max-w-2xl">
-            Haben Sie Fragen? Wir sind hier, um Ihnen zu helfen.
+            Haben Sie Fragen? Ich bin hier, um Ihnen zu helfen.
           </p>
         </div>
       </div>
@@ -61,6 +61,22 @@ export default function ContactPage() {
                 <div>
                   <h3 className="font-semibold">Email</h3>
                   <p className="text-gray-600">info@movementcave.at</p>
+                </div>
+              </div>
+
+              {/* WhatsApp Link */}
+              <div className="flex items-start space-x-4">
+                <MessageCircle className="w-6 h-6 text-red-600 mt-1" />
+                <div>
+                  <h3 className="font-semibold">WhatsApp</h3>
+                  <a
+                    href="https://wa.me/436606309501?text=Hello%20Movement%20Cave%21%20I%20have%20a%20question."
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-gray-600 hover:text-red-600 transition-colors"
+                  >
+                    +43 123 456 789
+                  </a>
                 </div>
               </div>
             </div>
@@ -146,7 +162,7 @@ export default function ContactPage() {
 
               {submitStatus === 'success' && (
                 <div className="p-4 bg-green-100 text-green-700 rounded-lg">
-                  Ihre Nachricht wurde erfolgreich gesendet. Wir werden uns bald bei Ihnen melden.
+                  Ihre Nachricht wurde erfolgreich gesendet. Ich werden mich bald bei Ihnen melden.
                 </div>
               )}
 

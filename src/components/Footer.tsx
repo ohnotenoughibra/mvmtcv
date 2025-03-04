@@ -1,6 +1,6 @@
 // src/components/Footer.tsx
 import Link from 'next/link';
-import { Instagram } from 'lucide-react';
+import { Instagram as InstagramIcon } from 'lucide-react';
 
 export default function Footer() {
   return (
@@ -56,7 +56,7 @@ export default function Footer() {
               rel="noopener noreferrer" 
               className="flex items-center space-x-2 text-gray-400 hover:text-red-500 transition-colors"
             >
-              <Instagram size={20} />
+              <InstagramIcon size={20} />
               <span>@movementcave_training</span>
             </a>
           </div>

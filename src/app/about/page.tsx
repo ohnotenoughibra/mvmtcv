@@ -35,7 +35,7 @@ export default function AboutPage() {
             Movement Cave
           </h1>
           <p className="text-xl text-gray-200 max-w-2xl">
-            Die Geschichte einer Leidenschaft für funktionelles Training im Herzen des Stubaitals.
+            Der Treffpunkt für alle mit einer Leidenschaft für Bewegung, körperliche und mentale Fitness im Herzen des Stubaitals.
           </p>
         </div>
       </div>
@@ -45,16 +45,12 @@ export default function AboutPage() {
         {/* Story Section */}
         <div className="grid md:grid-cols-2 gap-12 items-center mb-20">
           <div>
-            <h2 className="text-3xl font-bold mb-6">Die Movement Cave Story</h2>
+            <h2 className="text-3xl font-bold mb-6">Movement Cave - die Idee...</h2>
             <p className="text-gray-600 mb-4">
-              Die Movement Cave entstand aus meiner Vision, ein einzigartiges Trainingskonzept 
-              ins Stubaital zu bringen. Mit einem fundierten sportwissenschaftlichen Hintergrund 
-              und jahrelanger Erfahrung im Kampfsport war es mein Ziel, einen Ort zu schaffen, 
-              der professionelles Training mit persönlicher Betreuung verbindet.
+              mit persönlicher Betreuung verbindet und dabei auch ein Augenmerk auf natürliche Bewegungsformen und das Erkunden neuer Bewegungen legt.
             </p>
             <p className="text-gray-600">
-              Mein Ansatz basiert auf wissenschaftlichen Erkenntnissen und praktischer Erfahrung, 
-              kombiniert mit individueller Betreuung. In der Movement Cave vereinen wir 
+              Mein Ansatz basiert auf wissenschaftlichen Erkenntnissen und praktischer Erfahrung verpackt in spannende Trainingseinheiten. In der Movement Cave vereine ich
               funktionelles Training mit modernen Trainingsmethoden, angepasst an Ihre 
               persönlichen Ziele und Bedürfnisse.
             </p>
@@ -85,7 +81,7 @@ export default function AboutPage() {
               <h3 className="text-2xl font-bold mb-4">Clemens Pichler</h3>
               <p className="text-gray-600 mb-8">
                 Als Sportwissenschaftler und erfahrener Personal Trainer verbinde ich 
-                wissenschaftliche Expertise mit praktischer Erfahrung. Mein Hintergrund 
+                wissenschaftliche Expertise mit praktischer Erfahrung. Mein Background
                 im Kampfsport und die intensive Arbeit im Leistungs- und Gesundheitssport 
                 ermöglichen es mir, ein breites Spektrum an Trainingsmethoden anzubieten.
               </p>
