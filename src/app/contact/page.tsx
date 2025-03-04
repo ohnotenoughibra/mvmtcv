@@ -78,7 +78,7 @@ export default function ContactPage() {
                 <Mail className="w-6 h-6 text-red-600 mt-1" />
                 <div>
                   <h3 className="font-semibold">Email</h3>
-                  <p className="text-gray-600">movementcave123@gmail.com</p>
+                  <p className="text-gray-600">info@movementcave.at</p>
                 </div>
               </div>
 
@@ -118,7 +118,7 @@ export default function ContactPage() {
               {/* Honeypot field to prevent spam */}
               <p className="hidden">
                 <label>
-                  Don't fill this out if you're human: <input name="bot-field" />
+                  Don&apos;t fill this out if you&apos;re human: <input name="bot-field" />
                 </label>
               </p>
 
