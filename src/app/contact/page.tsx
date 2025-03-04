@@ -21,11 +21,17 @@ export default function ContactPage() {
       const form = e.currentTarget;
       const formData = new FormData(form);
       
+      // Convert FormData to URLSearchParams
+      const params = new URLSearchParams();
+      formData.forEach((value, key) => {
+        params.append(key, value.toString());
+      });
+      
       // This is the Netlify way of handling form submissions programmatically (optional)
       await fetch('/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: new URLSearchParams(formData as any).toString()
+        body: params.toString()
       });
       
       // Reset the form and show success
