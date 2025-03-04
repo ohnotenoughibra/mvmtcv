@@ -25,8 +25,8 @@ export default function Navigation() {
             <Image
               src="/images/logo.png" // Path to your logo in the public folder
               alt="Movement Cave Logo"
-              width={64} // Adjust width as needed
-              height={15} // Adjust height as needed
+              width={45} // Adjust width as needed
+              height={7} // Adjust height as needed
               className="object-contain"
             />
           </Link>
