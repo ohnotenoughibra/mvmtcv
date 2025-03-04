@@ -18,17 +18,18 @@ export default function ContactPage() {
     try {
       // The form will be handled by Netlify, but we can still provide feedback
       // Fetch is optional here - Netlify will handle the form even without it
-      const formData = new FormData(e.target);
+      const form = e.currentTarget;
+      const formData = new FormData(form);
       
       // This is the Netlify way of handling form submissions programmatically (optional)
       await fetch('/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: new URLSearchParams(formData).toString()
+        body: new URLSearchParams(formData as any).toString()
       });
       
       // Reset the form and show success
-      e.target.reset();
+      form.reset();
       setSubmitStatus('success');
     } catch (error) {
       console.error('Submission error:', error);
