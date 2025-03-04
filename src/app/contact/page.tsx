@@ -5,19 +5,37 @@ import { Mail, Phone, MapPin, MessageCircle } from 'lucide-react';
 
 export default function ContactPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [submitStatus, setSubmitStatus] = useState('idle');
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    
+    // For Netlify Forms, we don't actually need to handle the submission with JS
+    // as Netlify will automatically intercept the form submission
+    // But we can still enhance the UX with client-side feedback
     setIsSubmitting(true);
-    setSubmitStatus('idle');
-
-    // Simulate form submission
-    setTimeout(() => {
-      setIsSubmitting(false);
+    
+    try {
+      // The form will be handled by Netlify, but we can still provide feedback
+      // Fetch is optional here - Netlify will handle the form even without it
+      const formData = new FormData(e.target);
+      
+      // This is the Netlify way of handling form submissions programmatically (optional)
+      await fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams(formData).toString()
+      });
+      
+      // Reset the form and show success
+      e.target.reset();
       setSubmitStatus('success');
-      (e.target as HTMLFormElement).reset();
-    }, 1500);
+    } catch (error) {
+      console.error('Submission error:', error);
+      setSubmitStatus('error');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -52,7 +70,7 @@ export default function ContactPage() {
                 <Phone className="w-6 h-6 text-red-600 mt-1" />
                 <div>
                   <h3 className="font-semibold">Telefon</h3>
-                  <p className="text-gray-600">+43 123 456 789</p>
+                  <p className="text-gray-600">+43 676 682 1139</p>
                 </div>
               </div>
 
@@ -75,7 +93,7 @@ export default function ContactPage() {
                     rel="noopener noreferrer"
                     className="text-gray-600 hover:text-red-600 transition-colors"
                   >
-                    +43 123 456 789
+                    +43 676 682 1139
                   </a>
                 </div>
               </div>
@@ -85,7 +103,25 @@ export default function ContactPage() {
           {/* Contact Form */}
           <div>
             <h2 className="text-2xl font-bold mb-8">Schreiben Sie uns</h2>
-            <form onSubmit={handleSubmit} className="space-y-6">
+            {/* The key Netlify attributes: "data-netlify" and "name" */}
+            <form 
+              name="contact" 
+              method="POST" 
+              data-netlify="true"
+              netlify-honeypot="bot-field"
+              onSubmit={handleSubmit} 
+              className="space-y-6"
+            >
+              {/* Hidden field for Netlify */}
+              <input type="hidden" name="form-name" value="contact" />
+              
+              {/* Honeypot field to prevent spam */}
+              <p className="hidden">
+                <label>
+                  Don't fill this out if you're human: <input name="bot-field" />
+                </label>
+              </p>
+
               <div>
                 <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
                   Name
