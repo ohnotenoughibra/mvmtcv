@@ -43,7 +43,7 @@ export default function Footer() {
             <ul className="space-y-2 text-gray-400">
               <li>Stubaital, Österreich</li>
               <li>movementcave123@gmail.com</li>
-              <li>+43 123 456 789</li>
+              <li>+43 676 6821139</li>
             </ul>
           </div>
 
