@@ -28,7 +28,7 @@ export default function Home() {
   const services = [
     {
       title: 'Personal Training',
-      description: 'Individuelles Training, maßgeschneidert auf Ihre Ziele.',
+      description: 'Individuelles Training, maßgeschneidert auf deine Ziele.',
       icon: <Dumbbell className="w-6 h-6 text-red-400" />,
       slug: 'personal-training'
     },
@@ -40,7 +40,7 @@ export default function Home() {
     },
     {
       title: 'Trainingsplanung',
-      description: 'Professionelle Erstellung von individuellen Trainingsplänen für Ihre Ziele.',
+      description: 'Professionelle Erstellung von individuellen Trainingsplänen für deine Ziele.',
       icon: <Notebook className="w-6 h-6 text-red-400" />,
       slug: 'trainingsplanung'
     },
@@ -127,10 +127,10 @@ export default function Home() {
       <div className="py-24">
         <div className="max-w-6xl mx-auto px-6">
           <h2 className="text-3xl md:text-4xl font-bold mb-4 text-center">
-            Unsere Leistungen
+            Meine Leistungen
           </h2>
           <p className="text-neutral-600 text-center max-w-2xl mx-auto mb-16">
-            Professionelle Trainingsmöglichkeiten, die auf Ihre individuellen Bedürfnisse zugeschnitten sind.
+            Professionelle Trainingsmöglichkeiten, die auf deine individuellen Bedürfnisse zugeschnitten sind.
           </p>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -197,18 +197,18 @@ export default function Home() {
               <div className="w-16 h-1 bg-red-600 mb-8"></div>
               <p className="text-neutral-600 mb-6 text-lg leading-relaxed">
                 Im Herzen des Stubaitals biete ich professionelles Training in einer 
-                motivierenden Atmosphäre. Unser erfahrenes Team unterstützt Sie dabei, 
-                Ihre persönlichen Fitnessziele zu erreichen.
+                motivierenden Atmosphäre. Als erfahrener Trainer unterstütze ich dich dabei, 
+                deine persönlichen Fitnessziele zu erreichen.
               </p>
               <p className="text-neutral-600 mb-8 text-lg leading-relaxed">
                 Mit modernster Ausstattung und individuellen Trainingskonzepten 
-                begleiten wir Sie auf Ihrem Weg zu mehr Fitness und Wohlbefinden.
+                begleite ich dich auf deinem Weg zu mehr Fitness und Wohlbefinden.
               </p>
               <Link 
                 href="/about"
                 className="inline-flex items-center group"
               >
-                <span className="bg-neutral-900 text-white px-6 py-3 rounded-lg font-medium hover:bg-neutral-800 transition-colors">Mehr über uns</span>
+                <span className="bg-neutral-900 text-white px-6 py-3 rounded-lg font-medium hover:bg-neutral-800 transition-colors">Mehr über mich</span>
                 <svg className="ml-2 w-4 h-4 text-neutral-900 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
                 </svg>
@@ -226,7 +226,7 @@ export default function Home() {
             Bereit für den nächsten Schritt?
           </h2>
           <p className="text-xl mb-12 max-w-2xl mx-auto text-white/80">
-            Starten Sie Ihre Fitness-Journey mit einem kostenlosen Erstgespräch.
+            Starte deine Fitness-Journey mit einem kostenlosen Erstgespräch.
           </p>
           <Link 
             href="/contact#contact-form"
@@ -244,10 +244,10 @@ export default function Home() {
       <div className="py-24 bg-neutral-50">
         <div className="max-w-6xl mx-auto px-6">
           <h2 className="text-3xl md:text-4xl font-bold mb-4 text-center">
-            Einblicke in unser Studio
+            Einblicke in mein Studio
           </h2>
           <p className="text-neutral-600 text-center max-w-2xl mx-auto mb-16">
-            Entdecken Sie unsere moderne Trainingsumgebung und professionelle Ausstattung.
+            Entdecke meine moderne Trainingsumgebung und professionelle Ausstattung.
           </p>
           
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
