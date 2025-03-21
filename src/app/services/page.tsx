@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
+import { useState } from 'react';
 
 interface Service {
   title: string;
@@ -10,18 +11,27 @@ interface Service {
   features: string[];
 }
 
-// ServiceCard Component (Modernized)
+// ServiceCard Component (Modernized with improved image loading)
 const ServiceCard = ({ service }: { service: Service }) => {
+  const [imageLoaded, setImageLoaded] = useState(false);
+
   return (
     <div className="bg-neutral-800 text-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1 group">
-      {/* Image Container */}
+      {/* Image Container with background placeholder */}
       <div className="relative w-full aspect-video">
+        {/* Dark background placeholder while image loads */}
+        <div className="absolute inset-0 bg-neutral-700"></div>
+        
         <Image
           src={service.image}
           alt={service.title}
           fill
           sizes="(max-width: 768px) 100vw, 50vw"
-          className="object-cover group-hover:scale-105 transition-transform duration-700"
+          onLoadingComplete={() => setImageLoaded(true)}
+          loading="eager" // Force eager loading for visibility
+          className={`object-cover group-hover:scale-105 transition-transform duration-700 ${
+            imageLoaded ? 'opacity-100' : 'opacity-0'
+          }`}
         />
         <div className="absolute inset-0 bg-gradient-to-t from-neutral-900 to-transparent opacity-60"></div>
         <div className="absolute bottom-0 left-0 w-full p-6">
@@ -55,8 +65,18 @@ const ServiceCard = ({ service }: { service: Service }) => {
   );
 };
 
-// ServicesPage Component
+// ServicesPage Component with improved image handling
 export default function ServicesPage() {
+  // Preload function to make sure images are loaded
+  const preloadImages = (urls: string[]) => {
+    if (typeof window !== 'undefined') {
+      urls.forEach(url => {
+        const img = new Image();
+        img.src = url;
+      });
+    }
+  };
+
   const services = [
     {
       title: 'Personal Training',
@@ -103,6 +123,9 @@ export default function ServicesPage() {
       ],
     },
   ];
+
+  // Preload all service images
+  preloadImages(services.map(service => service.image));
 
   return (
     <main className="min-h-screen bg-neutral-50 text-neutral-900">
