@@ -70,7 +70,7 @@ export default function ServicesPage() {
   const services = [
     {
       title: 'Personal Training',
-      description: 'Individuelles Training, maßgeschneidert auf Ihre persönlichen Ziele.',
+      description: 'Individuelles Training, maßgeschneidert auf deine persönlichen Ziele.',
       image: '/images/services/personal-training.jpg',
       features: [
         'Professionelles Coaching und Beratung',
@@ -92,7 +92,7 @@ export default function ServicesPage() {
     },
     {
       title: 'Trainingsplanung',
-      description: 'Professionelle Erstellung von individuellen Trainingsplänen für Ihre Ziele.',
+      description: 'Professionelle Erstellung von individuellen Trainingsplänen für deine Ziele.',
       image: '/images/services/trainingsplanung.jpg',
       features: [
         'Individuelle Trainingspläne',
@@ -133,12 +133,11 @@ export default function ServicesPage() {
         <div className="relative z-10 max-w-6xl mx-auto px-6">
           <div className="animate-fade-in">
             <h1 className="text-4xl md:text-6xl font-bold mb-6 text-white tracking-tight">
-              Unsere Leistungen
+              Leistungen
             </h1>
             <div className="w-24 h-1 bg-red-400 mb-8"></div>
             <p className="text-xl text-white/90 max-w-2xl leading-relaxed">
-              Entdecken Sie unsere vielfältigen Trainingsangebote und finden Sie das perfekte Programm
-              für Ihre Fitnessziele.
+              Lerne meine vielfältigen Trainingsangebote kennen und finde das passende Programm für deine Fitnessziele!
             </p>
           </div>
         </div>
@@ -161,8 +160,7 @@ export default function ServicesPage() {
             Bereit für den nächsten Schritt?
           </h2>
           <p className="text-xl mb-12 max-w-2xl mx-auto text-white/80">
-            Vereinbaren Sie jetzt ein kostenloses Erstgespräch und lassen Sie uns gemeinsam Ihre
-            Fitnessziele erreichen.
+            Vereinbare jetzt ein kostenloses Erstgespräch und lass uns gemeinsam deine Fitnessziele erreichen.
           </p>
           <Link 
             href="/contact#contact-form"

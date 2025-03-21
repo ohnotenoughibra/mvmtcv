@@ -53,12 +53,11 @@ export default function AboutPage() {
             <h2 className="text-3xl md:text-4xl font-bold mb-6">Movement Cave - die Idee...</h2>
             <div className="w-16 h-1 bg-red-600 mb-8"></div>
             <p className="text-neutral-600 mb-6 text-lg leading-relaxed">
-              mit persönlicher Betreuung verbindet und dabei auch ein Augenmerk auf natürliche Bewegungsformen und das Erkunden neuer Bewegungen legt.
+              Mit persönlicher Betreuung verbinde ich natürliche Bewegungsformen und das Erkunden neuer Bewegungen.
             </p>
             <p className="text-neutral-600 text-lg leading-relaxed">
-              Mein Ansatz basiert auf wissenschaftlichen Erkenntnissen und praktischer Erfahrung verpackt in spannende Trainingseinheiten. In der Movement Cave vereine ich
-              funktionelles Training mit modernen Trainingsmethoden, angepasst an Ihre 
-              persönlichen Ziele und Bedürfnisse.
+              Mein Ansatz basiert auf wissenschaftlichen Erkenntnissen und praktischer Erfahrung, verpackt in spannende Trainingseinheiten. In der Movement Cave vereine ich
+              funktionelles Training mit modernen Trainingsmethoden, angepasst an deine persönlichen Ziele und Bedürfnisse.
             </p>
           </div>
           <div className="relative aspect-square md:aspect-auto md:h-[500px] rounded-2xl overflow-hidden shadow-2xl">
@@ -78,7 +77,7 @@ export default function AboutPage() {
 
         {/* Coach Section - Fixed layout to prevent image overlay */}
         <div className="mb-32">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-center">Ihr Coach</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-center">Dein Coach</h2>
           <p className="text-neutral-600 text-center max-w-2xl mx-auto mb-16">
             Erfahrung, Fachwissen und Leidenschaft für effektives Training.
           </p>
@@ -156,11 +155,11 @@ export default function AboutPage() {
         <div className="absolute inset-0 bg-gradient-to-br from-neutral-900 to-red-800 skew-y-[-3deg] origin-top-right transform-gpu -translate-y-16"></div>
         <div className="relative z-10 max-w-6xl mx-auto px-6 text-center">
           <h2 className="text-3xl md:text-5xl font-bold mb-8 text-white">
-            Bereit für Ihr persönliches Training?
+            Bereit für dein persönliches Training?
           </h2>
           <p className="text-xl text-white/80 mb-12 max-w-2xl mx-auto">
-            Vereinbaren Sie ein kostenloses Erstgespräch und lassen Sie uns gemeinsam 
-            Ihre Fitnessziele erreichen.
+            Vereinbare ein kostenloses Erstgespräch und lass uns gemeinsam 
+            deine Fitnessziele erreichen.
           </p>
           <Link
             href="/contact#contact-form"

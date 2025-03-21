@@ -45,11 +45,11 @@ export default function ContactPage() {
         <div className="relative z-10 max-w-6xl mx-auto px-6">
           <div className="animate-fade-in">
             <h1 className="text-4xl md:text-6xl font-bold mb-6 text-white tracking-tight">
-              Kontaktieren Sie uns
+              Kontaktiere mich
             </h1>
             <div className="w-24 h-1 bg-red-400 mb-8"></div>
             <p className="text-xl text-white/90 max-w-2xl leading-relaxed">
-              Haben Sie Fragen? Ich bin hier, um Ihnen zu helfen.
+              Hast du Fragen? Ich bin hier, um dir zu helfen.
             </p>
           </div>
         </div>
@@ -114,7 +114,7 @@ export default function ContactPage() {
 
           {/* Contact Form with modern styling */}
           <div className="bg-white p-8 rounded-2xl shadow-lg">
-            <h2 className="text-3xl font-bold mb-6">Schreiben Sie uns</h2>
+            <h2 className="text-3xl font-bold mb-6">Schreib mir</h2>
             <div className="w-16 h-1 bg-red-600 mb-8"></div>
             
             <form 
@@ -145,7 +145,7 @@ export default function ContactPage() {
                   name="name"
                   required
                   className="w-full px-4 py-3 bg-neutral-50 border border-neutral-200 rounded-lg focus:ring-2 focus:ring-red-600 focus:border-transparent transition-colors"
-                  placeholder="Ihr Name"
+                  placeholder="Dein Name"
                 />
               </div>
 
@@ -159,7 +159,7 @@ export default function ContactPage() {
                   name="email"
                   required
                   className="w-full px-4 py-3 bg-neutral-50 border border-neutral-200 rounded-lg focus:ring-2 focus:ring-red-600 focus:border-transparent transition-colors"
-                  placeholder="ihre-email@example.com"
+                  placeholder="deine-email@example.com"
                 />
               </div>
 
@@ -186,7 +186,7 @@ export default function ContactPage() {
                   name="subject"
                   required
                   className="w-full px-4 py-3 bg-neutral-50 border border-neutral-200 rounded-lg focus:ring-2 focus:ring-red-600 focus:border-transparent transition-colors"
-                  placeholder="Grund Ihrer Anfrage"
+                  placeholder="Grund deiner Anfrage"
                 />
               </div>
 
@@ -200,7 +200,7 @@ export default function ContactPage() {
                   rows={5}
                   required
                   className="w-full px-4 py-3 bg-neutral-50 border border-neutral-200 rounded-lg focus:ring-2 focus:ring-red-600 focus:border-transparent transition-colors"
-                  placeholder="Ihre Nachricht hier..."
+                  placeholder="Deine Nachricht hier..."
                 ></textarea>
               </div>
 
@@ -220,7 +220,7 @@ export default function ContactPage() {
                     <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                     </svg>
-                    Ihre Nachricht wurde erfolgreich gesendet. Ich werden mich bald bei Ihnen melden.
+                    Deine Nachricht wurde erfolgreich gesendet. Ich melde mich bald bei dir.
                   </div>
                 </div>
               )}
@@ -231,7 +231,7 @@ export default function ContactPage() {
                     <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                     </svg>
-                    Es gab einen Fehler beim Senden Ihrer Nachricht. Bitte versuchen Sie es später erneut.
+                    Es gab einen Fehler beim Senden deiner Nachricht. Bitte versuche es später noch einmal.
                   </div>
                 </div>
               )}
