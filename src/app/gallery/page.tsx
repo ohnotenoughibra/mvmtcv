@@ -6,7 +6,8 @@ import { ChevronLeft, ChevronRight, X, Search } from 'lucide-react';
 
 export default function GalleryPage() {
   const [selectedImage, setSelectedImage] = useState<number | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
+  // Remove the isLoading state if it's not being used
+  // const [isLoading, setIsLoading] = useState(true);
 
   const images = [
     {
@@ -35,14 +36,20 @@ export default function GalleryPage() {
     }
   ];
 
-  useEffect(() => {
-    // Simulate images loading
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 500);
-  }, []);
+  // Define navigation functions outside of useEffect
+  const nextImage = () => {
+    setSelectedImage(current => 
+      current === null ? 0 : current === images.length - 1 ? 0 : current + 1
+    );
+  };
 
-  // Handle keyboard navigation
+  const previousImage = () => {
+    setSelectedImage(current => 
+      current === null ? 0 : current === 0 ? images.length - 1 : current - 1
+    );
+  };
+
+  // Handle keyboard navigation with proper dependencies
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (selectedImage === null) return;
@@ -69,19 +76,7 @@ export default function GalleryPage() {
       window.removeEventListener('keydown', handleKeyDown);
       document.body.style.overflow = 'auto';
     };
-  }, [selectedImage]);
-
-  const nextImage = () => {
-    setSelectedImage(current => 
-      current === null ? 0 : current === images.length - 1 ? 0 : current + 1
-    );
-  };
-
-  const previousImage = () => {
-    setSelectedImage(current => 
-      current === null ? 0 : current === 0 ? images.length - 1 : current - 1
-    );
-  };
+  }, [selectedImage, nextImage, previousImage]); // Add proper dependencies
 
   return (
     <main className="min-h-screen bg-neutral-50 text-neutral-900">
@@ -114,6 +109,9 @@ export default function GalleryPage() {
                 src={image.src}
                 alt={image.alt}
                 fill
+                loading="lazy"
+                sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                quality={75}
                 className="object-cover transition-transform duration-700 group-hover:scale-110"
               />
               <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
@@ -158,6 +156,7 @@ export default function GalleryPage() {
               alt={images[selectedImage].alt}
               fill
               priority
+              sizes="100vw"
               className="object-contain"
             />
             <div className="absolute bottom-8 left-0 right-0 text-center">
