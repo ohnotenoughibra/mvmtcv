@@ -88,7 +88,7 @@ export default function ContactPage() {
                 </div>
                 <div>
                   <h3 className="font-semibold text-lg mb-2">Email</h3>
-                  <p className="text-neutral-300">info@movementcave.at</p>
+                  <p className="text-neutral-300">movementcave123@gmail.com</p>
                 </div>
               </div>
 

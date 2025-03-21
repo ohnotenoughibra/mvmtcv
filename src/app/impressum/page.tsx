@@ -35,14 +35,17 @@ export default function ImpressumPage() {
           </section>
 
           <section className="mb-12">
-            <h2 className="text-2xl font-bold mb-6 text-neutral-800">Kontakt</h2>
-            <div className="w-16 h-1 bg-red-600 mb-6"></div>
-            <div className="bg-neutral-800 text-white p-6 rounded-xl shadow-md">
-              <p className="text-neutral-300 leading-relaxed">
-                E-Mail: <a href="mailto:movementcave123@gmail.com" className="text-red-400 hover:underline transition-colors">movementcave123@gmail.com</a>
-              </p>
-            </div>
-          </section>
+  <h2 className="text-2xl font-bold mb-6 text-neutral-800">Kontakt</h2>
+  <div className="w-16 h-1 bg-red-600 mb-6"></div>
+  <div className="bg-neutral-800 text-white p-6 rounded-xl shadow-md">
+    <p className="text-neutral-300 leading-relaxed mb-3">
+      E-Mail: <a href="mailto:movementcave123@gmail.com" className="text-red-400 hover:underline transition-colors">movementcave123@gmail.com</a>
+    </p>
+    <p className="text-neutral-300 leading-relaxed">
+      Telefon: <a href="tel:+436766821139" className="text-red-400 hover:underline transition-colors">+43 676 682 1139</a>
+    </p>
+  </div>
+</section>
 
           <section className="mb-12">
             <h2 className="text-2xl font-bold mb-6 text-neutral-800">Gewerbliche Informationen</h2>
