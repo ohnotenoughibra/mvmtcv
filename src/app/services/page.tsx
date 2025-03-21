@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 interface Service {
   title: string;
@@ -67,16 +67,6 @@ const ServiceCard = ({ service }: { service: Service }) => {
 
 // ServicesPage Component with improved image handling
 export default function ServicesPage() {
-  // Preload function to make sure images are loaded
-  const preloadImages = (urls: string[]) => {
-    if (typeof window !== 'undefined') {
-      urls.forEach(url => {
-        const img = new Image();
-        img.src = url;
-      });
-    }
-  };
-
   const services = [
     {
       title: 'Personal Training',
@@ -124,8 +114,16 @@ export default function ServicesPage() {
     },
   ];
 
-  // Preload all service images
-  preloadImages(services.map(service => service.image));
+  // Fixed preloading function that uses the browser's Image constructor properly
+  useEffect(() => {
+    // Only run in browser environment
+    if (typeof window !== 'undefined') {
+      services.forEach(service => {
+        const imgLoader = document.createElement('img');
+        imgLoader.src = service.image;
+      });
+    }
+  }, []);
 
   return (
     <main className="min-h-screen bg-neutral-50 text-neutral-900">
