@@ -68,7 +68,7 @@ export default function ContactPage() {
                 </div>
                 <div>
                   <h3 className="font-semibold text-lg mb-2">Adresse</h3>
-                  <p className="text-neutral-300">Stubaital, Österreich</p>
+                  <p className="text-neutral-300">Habichtsgasse 2 6167 Neustift im Stubaital, Tirol Österreich</p>
                 </div>
               </div>
 

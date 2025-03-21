@@ -81,7 +81,7 @@ export default function Footer() {
             <ul className="space-y-3 mt-6">
               <li className="flex items-start text-neutral-400">
                 <MapPin className="w-5 h-5 text-red-400 mr-3 flex-shrink-0 mt-1" />
-                <span>Stubaital, Österreich</span>
+                <span>Habichtsgasse 2 6167 Neustift im Stubaital, Tirol Österreich</span>
               </li>
               <li className="flex items-start text-neutral-400">
                 <Mail className="w-5 h-5 text-red-400 mr-3 flex-shrink-0 mt-1" />
