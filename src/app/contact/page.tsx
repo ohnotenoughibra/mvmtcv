@@ -10,31 +10,23 @@ export default function ContactPage() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     
-    // For Netlify Forms, we don't actually need to handle the submission with JS
-    // as Netlify will automatically intercept the form submission
-    // But we can still enhance the UX with client-side feedback
     setIsSubmitting(true);
     
     try {
-      // The form will be handled by Netlify, but we can still provide feedback
-      // Fetch is optional here - Netlify will handle the form even without it
       const form = e.currentTarget;
       const formData = new FormData(form);
       
-      // Convert FormData to URLSearchParams
       const params = new URLSearchParams();
       formData.forEach((value, key) => {
         params.append(key, value.toString());
       });
       
-      // This is the Netlify way of handling form submissions programmatically (optional)
       await fetch('/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         body: params.toString()
       });
       
-      // Reset the form and show success
       form.reset();
       setSubmitStatus('success');
     } catch (error) {
@@ -46,59 +38,72 @@ export default function ContactPage() {
   };
 
   return (
-    <main className="min-h-screen pt-16">
-      {/* Hero Section */}
-      <div className="bg-gradient-to-r from-black to-red-800 text-white py-20">
-        <div className="max-w-6xl mx-auto px-4">
-          <h1 className="text-4xl md:text-5xl font-bold mb-6">
-            Kontaktieren Sie uns
-          </h1>
-          <p className="text-xl text-gray-200 max-w-2xl">
-            Haben Sie Fragen? Ich bin hier, um Ihnen zu helfen.
-          </p>
+    <main className="min-h-screen bg-neutral-50 text-neutral-900">
+      {/* Hero Section with skewed background */}
+      <div className="relative py-28 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-r from-neutral-900 to-red-800 skew-y-[-3deg] origin-top-left transform-gpu -translate-y-16"></div>
+        <div className="relative z-10 max-w-6xl mx-auto px-6">
+          <div className="animate-fade-in">
+            <h1 className="text-4xl md:text-6xl font-bold mb-6 text-white tracking-tight">
+              Kontaktieren Sie uns
+            </h1>
+            <div className="w-24 h-1 bg-red-400 mb-8"></div>
+            <p className="text-xl text-white/90 max-w-2xl leading-relaxed">
+              Haben Sie Fragen? Ich bin hier, um Ihnen zu helfen.
+            </p>
+          </div>
         </div>
       </div>
 
-      <div className="max-w-6xl mx-auto px-4 py-16">
+      <div className="max-w-6xl mx-auto px-6 py-24">
         <div className="grid md:grid-cols-2 gap-16">
-          {/* Contact Information */}
+          {/* Contact Information with dark-themed cards */}
           <div>
-            <h2 className="text-2xl font-bold mb-8">Kontaktinformationen</h2>
+            <h2 className="text-3xl font-bold mb-6">Kontaktinformationen</h2>
+            <div className="w-16 h-1 bg-red-600 mb-8"></div>
             <div className="space-y-6">
-              <div className="flex items-start space-x-4">
-                <MapPin className="w-6 h-6 text-red-600 mt-1" />
+              <div className="bg-neutral-800 text-white rounded-xl p-6 shadow-md flex items-start space-x-6 hover:shadow-xl transition-all duration-300">
+                <div className="bg-red-900/30 p-3 rounded-lg">
+                  <MapPin className="w-6 h-6 text-red-400" />
+                </div>
                 <div>
-                  <h3 className="font-semibold">Adresse</h3>
-                  <p className="text-gray-600">Stubaital, Österreich</p>
+                  <h3 className="font-semibold text-lg mb-2">Adresse</h3>
+                  <p className="text-neutral-300">Stubaital, Österreich</p>
                 </div>
               </div>
 
-              <div className="flex items-start space-x-4">
-                <Phone className="w-6 h-6 text-red-600 mt-1" />
+              <div className="bg-neutral-800 text-white rounded-xl p-6 shadow-md flex items-start space-x-6 hover:shadow-xl transition-all duration-300">
+                <div className="bg-red-900/30 p-3 rounded-lg">
+                  <Phone className="w-6 h-6 text-red-400" />
+                </div>
                 <div>
-                  <h3 className="font-semibold">Telefon</h3>
-                  <p className="text-gray-600">+43 676 682 1139</p>
+                  <h3 className="font-semibold text-lg mb-2">Telefon</h3>
+                  <p className="text-neutral-300">+43 676 682 1139</p>
                 </div>
               </div>
 
-              <div className="flex items-start space-x-4">
-                <Mail className="w-6 h-6 text-red-600 mt-1" />
+              <div className="bg-neutral-800 text-white rounded-xl p-6 shadow-md flex items-start space-x-6 hover:shadow-xl transition-all duration-300">
+                <div className="bg-red-900/30 p-3 rounded-lg">
+                  <Mail className="w-6 h-6 text-red-400" />
+                </div>
                 <div>
-                  <h3 className="font-semibold">Email</h3>
-                  <p className="text-gray-600">info@movementcave.at</p>
+                  <h3 className="font-semibold text-lg mb-2">Email</h3>
+                  <p className="text-neutral-300">info@movementcave.at</p>
                 </div>
               </div>
 
               {/* WhatsApp Link */}
-              <div className="flex items-start space-x-4">
-                <MessageCircle className="w-6 h-6 text-red-600 mt-1" />
+              <div className="bg-neutral-800 text-white rounded-xl p-6 shadow-md flex items-start space-x-6 hover:shadow-xl transition-all duration-300">
+                <div className="bg-red-900/30 p-3 rounded-lg">
+                  <MessageCircle className="w-6 h-6 text-red-400" />
+                </div>
                 <div>
-                  <h3 className="font-semibold">WhatsApp</h3>
+                  <h3 className="font-semibold text-lg mb-2">WhatsApp</h3>
                   <a
                     href="https://wa.me/436606309501?text=Hello%20Movement%20Cave%21%20I%20have%20a%20question."
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-gray-600 hover:text-red-600 transition-colors"
+                    className="text-neutral-300 hover:text-red-400 transition-colors"
                   >
                     +43 676 682 1139
                   </a>
@@ -107,10 +112,11 @@ export default function ContactPage() {
             </div>
           </div>
 
-          {/* Contact Form */}
-          <div>
-            <h2 className="text-2xl font-bold mb-8">Schreiben Sie uns</h2>
-            {/* The key Netlify attributes: "data-netlify" and "name" */}
+          {/* Contact Form with modern styling */}
+          <div className="bg-white p-8 rounded-2xl shadow-lg">
+            <h2 className="text-3xl font-bold mb-6">Schreiben Sie uns</h2>
+            <div className="w-16 h-1 bg-red-600 mb-8"></div>
+            
             <form 
               name="contact" 
               method="POST" 
@@ -130,7 +136,7 @@ export default function ContactPage() {
               </p>
 
               <div>
-                <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
+                <label htmlFor="name" className="block text-sm font-medium text-neutral-700 mb-2">
                   Name
                 </label>
                 <input
@@ -138,12 +144,13 @@ export default function ContactPage() {
                   id="name"
                   name="name"
                   required
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-600 focus:border-transparent"
+                  className="w-full px-4 py-3 bg-neutral-50 border border-neutral-200 rounded-lg focus:ring-2 focus:ring-red-600 focus:border-transparent transition-colors"
+                  placeholder="Ihr Name"
                 />
               </div>
 
               <div>
-                <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+                <label htmlFor="email" className="block text-sm font-medium text-neutral-700 mb-2">
                   Email
                 </label>
                 <input
@@ -151,24 +158,26 @@ export default function ContactPage() {
                   id="email"
                   name="email"
                   required
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-600 focus:border-transparent"
+                  className="w-full px-4 py-3 bg-neutral-50 border border-neutral-200 rounded-lg focus:ring-2 focus:ring-red-600 focus:border-transparent transition-colors"
+                  placeholder="ihre-email@example.com"
                 />
               </div>
 
               <div>
-                <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">
+                <label htmlFor="phone" className="block text-sm font-medium text-neutral-700 mb-2">
                   Telefon
                 </label>
                 <input
                   type="tel"
                   id="phone"
                   name="phone"
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-600 focus:border-transparent"
+                  className="w-full px-4 py-3 bg-neutral-50 border border-neutral-200 rounded-lg focus:ring-2 focus:ring-red-600 focus:border-transparent transition-colors"
+                  placeholder="+43 123 456 789"
                 />
               </div>
 
               <div>
-                <label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-1">
+                <label htmlFor="subject" className="block text-sm font-medium text-neutral-700 mb-2">
                   Betreff
                 </label>
                 <input
@@ -176,12 +185,13 @@ export default function ContactPage() {
                   id="subject"
                   name="subject"
                   required
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-600 focus:border-transparent"
+                  className="w-full px-4 py-3 bg-neutral-50 border border-neutral-200 rounded-lg focus:ring-2 focus:ring-red-600 focus:border-transparent transition-colors"
+                  placeholder="Grund Ihrer Anfrage"
                 />
               </div>
 
               <div>
-                <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">
+                <label htmlFor="message" className="block text-sm font-medium text-neutral-700 mb-2">
                   Nachricht
                 </label>
                 <textarea
@@ -189,14 +199,15 @@ export default function ContactPage() {
                   name="message"
                   rows={5}
                   required
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-600 focus:border-transparent"
+                  className="w-full px-4 py-3 bg-neutral-50 border border-neutral-200 rounded-lg focus:ring-2 focus:ring-red-600 focus:border-transparent transition-colors"
+                  placeholder="Ihre Nachricht hier..."
                 ></textarea>
               </div>
 
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className={`w-full bg-red-600 text-white py-3 rounded-lg hover:bg-red-700 transition-colors ${
+                className={`w-full mt-4 bg-red-600 text-white py-4 rounded-lg hover:bg-red-700 transition-all duration-300 shadow-md hover:shadow-lg ${
                   isSubmitting ? 'opacity-50 cursor-not-allowed' : ''
                 }`}
               >
@@ -204,14 +215,24 @@ export default function ContactPage() {
               </button>
 
               {submitStatus === 'success' && (
-                <div className="p-4 bg-green-100 text-green-700 rounded-lg">
-                  Ihre Nachricht wurde erfolgreich gesendet. Ich werden mich bald bei Ihnen melden.
+                <div className="p-4 mt-4 bg-green-100 text-green-700 rounded-lg border border-green-200 animate-fade-in">
+                  <div className="flex items-center">
+                    <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                    Ihre Nachricht wurde erfolgreich gesendet. Ich werden mich bald bei Ihnen melden.
+                  </div>
                 </div>
               )}
 
               {submitStatus === 'error' && (
-                <div className="p-4 bg-red-100 text-red-700 rounded-lg">
-                  Es gab einen Fehler beim Senden Ihrer Nachricht. Bitte versuchen Sie es später erneut.
+                <div className="p-4 mt-4 bg-red-100 text-red-700 rounded-lg border border-red-200 animate-fade-in">
+                  <div className="flex items-center">
+                    <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                    Es gab einen Fehler beim Senden Ihrer Nachricht. Bitte versuchen Sie es später erneut.
+                  </div>
                 </div>
               )}
             </form>

@@ -32,24 +32,32 @@ export default function Home() {
     <main className="min-h-screen bg-neutral-50 text-neutral-900 selection:bg-red-600 selection:text-white">
       {/* Hero Section - Full height with parallax effect */}
       <div className="relative h-screen overflow-hidden">
-        {/* Mobile Hero Image */}
+        {/* Mobile Hero Image - Optimized */}
         <div className="absolute inset-0 scale-[1.02] md:hidden">
           <Image
             src="/images/hero-mobile.jpg"
             alt="Movement Cave Hero"
             fill
-            priority
+            priority={true}
+            sizes="100vw"
+            quality={85}
+            placeholder="blur"
+            blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAUDBAQEAwUEBAQFBQUGBwwIBwcHBw8LCwkMEQ8SEhEPERETFhwXExQaFRERGCEYGh0dHx8fExciJCIeJBweHx7/2wBDAQUFBQcGBw4ICA4eFBEUHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh7/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAb/xAAhEAACAgEDBQAAAAAAAAAAAAABAgMRBAASITFBUWGR/8QAFQEBAQAAAAAAAAAAAAAAAAAAAQL/xAAYEQEAAwEAAAAAAAAAAAAAAAABAAIRIf/aAAwDAQACEQMRAD8AcZDkdNJFLGVQB3brSCvd0O/9rlJ45FjYqwlK1YB4N++upM4xrFimlrEUY27VNn5pSlAb1ztbR2//2Q=="
             className="object-cover transition-transform ease-out duration-1000 transform-gpu"
           />
         </div>
         
-        {/* Desktop Hero Image */}
+        {/* Desktop Hero Image - Optimized */}
         <div className="absolute inset-0 scale-[1.02] hidden md:block">
           <Image
             src="/images/hero-desktop.jpg"
             alt="Movement Cave Hero"
             fill
-            priority
+            priority={true}
+            sizes="100vw"
+            quality={85}
+            placeholder="blur"
+            blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAUDBAQEAwUEBAQFBQUGBwwIBwcHBw8LCwkMEQ8SEhEPERETFhwXExQaFRERGCEYGh0dHx8fExciJCIeJBweHx7/2wBDAQUFBQcGBw4ICA4eFBEUHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh7/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAb/xAAhEAACAgEDBQAAAAAAAAAAAAABAgMRBAASITFBUWGR/8QAFQEBAQAAAAAAAAAAAAAAAAAAAQL/xAAYEQEAAwEAAAAAAAAAAAAAAAABAAIRIf/aAAwDAQACEQMRAD8AcZDkdNJFLGVQB3brSCvd0O/9rlJ45FjYqwlK1YB4N++upM4xrFimlrEUY27VNn5pSlAb1ztbR2//2Q=="
             className="object-cover transition-transform ease-out duration-1000 transform-gpu"
           />
         </div>
@@ -125,7 +133,7 @@ export default function Home() {
         </div>
       </div>
 
-      {/* About Section with staggered design */}
+      {/* About Section with staggered design - Optimized Image */}
       <div className="py-24 bg-white">
         <div className="max-w-6xl mx-auto px-6">
           <div className="grid md:grid-cols-2 gap-16 items-center">
@@ -134,6 +142,11 @@ export default function Home() {
                 src="/images/about-gym.jpg"
                 alt="Movement Cave Gym"
                 fill
+                loading="lazy"
+                sizes="(max-width: 768px) 100vw, 50vw"
+                quality={80}
+                placeholder="blur"
+                blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAUDBAQEAwUEBAQFBQUGBwwIBwcHBw8LCwkMEQ8SEhEPERETFhwXExQaFRERGCEYGh0dHx8fExciJCIeJBweHx7/2wBDAQUFBQcGBw4ICA4eFBEUHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh7/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAb/xAAhEAACAgEDBQAAAAAAAAAAAAABAgMRBAASITFBUWGR/8QAFQEBAQAAAAAAAAAAAAAAAAAAAQL/xAAYEQEAAwEAAAAAAAAAAAAAAAABAAIRIf/aAAwDAQACEQMRAD8AcZDkdNJFLGVQB3brSCvd0O/9rlJ45FjYqwlK1YB4N++upM4xrFimlrEUY27VNn5pSlAb1ztbR2//2Q=="
                 className="object-cover hover:scale-105 transition-transform duration-700"
               />
             </div>
@@ -187,7 +200,7 @@ export default function Home() {
         </div>
       </div>
 
-      {/* Gallery Preview with modern grid and hover effects */}
+      {/* Gallery Preview with modern grid and hover effects - Optimized Images */}
       <div className="py-24 bg-neutral-50">
         <div className="max-w-6xl mx-auto px-6">
           <h2 className="text-3xl md:text-4xl font-bold mb-4 text-center">
@@ -204,6 +217,11 @@ export default function Home() {
                   src={`/images/gallery/gym-${num}.jpg`}
                   alt={`Gym Preview ${num}`}
                   fill
+                  loading="lazy"
+                  sizes="(max-width: 640px) 50vw, (max-width: 768px) 33vw, 25vw"
+                  quality={75}
+                  placeholder="blur"
+                  blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAUDBAQEAwUEBAQFBQUGBwwIBwcHBw8LCwkMEQ8SEhEPERETFhwXExQaFRERGCEYGh0dHx8fExciJCIeJBweHx7/2wBDAQUFBQcGBw4ICA4eFBEUHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh7/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAb/xAAhEAACAgEDBQAAAAAAAAAAAAABAgMRBAASITFBUWGR/8QAFQEBAQAAAAAAAAAAAAAAAAAAAQL/xAAYEQEAAwEAAAAAAAAAAAAAAAABAAIRIf/aAAwDAQACEQMRAD8AcZDkdNJFLGVQB3brSCvd0O/9rlJ45FjYqwlK1YB4N++upM4xrFimlrEUY27VNn5pSlAb1ztbR2//2Q=="
                   className="object-cover transition-transform duration-700 group-hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>

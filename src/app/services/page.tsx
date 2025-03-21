@@ -1,3 +1,5 @@
+'use client';
+
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -8,35 +10,47 @@ interface Service {
   features: string[];
 }
 
-// ServiceCard Component (Modular)
+// ServiceCard Component (Modernized)
 const ServiceCard = ({ service }: { service: Service }) => {
   return (
-    <div className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+    <div className="bg-neutral-800 text-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1 group">
       {/* Image Container */}
-      <div className="relative w-full aspect-[9/16]">
+      <div className="relative w-full aspect-video">
         <Image
           src={service.image}
           alt={service.title}
           fill
           sizes="(max-width: 768px) 100vw, 50vw"
-          className="object-cover hover:scale-105 transition-transform duration-300"
+          className="object-cover group-hover:scale-105 transition-transform duration-700"
         />
+        <div className="absolute inset-0 bg-gradient-to-t from-neutral-900 to-transparent opacity-60"></div>
+        <div className="absolute bottom-0 left-0 w-full p-6">
+          <h3 className="text-2xl font-bold">{service.title}</h3>
+        </div>
       </div>
 
       {/* Content */}
       <div className="p-8">
-        <h3 className="text-2xl font-bold mb-4">{service.title}</h3>
-        <p className="text-gray-600 mb-6">{service.description}</p>
-        <ul className="space-y-3 mb-6">
+        <p className="text-neutral-300 mb-6 leading-relaxed">{service.description}</p>
+        <div className="w-12 h-0.5 bg-red-600 mb-6"></div>
+        <ul className="space-y-4 mb-6">
           {service.features.map((feature: string, i: number) => (
-            <li key={i} className="flex items-center text-gray-700">
-              <span className="w-2 h-2 bg-red-600 rounded-full mr-3"></span>
-              {feature}
+            <li key={i} className="flex items-start text-neutral-300">
+              <span className="w-2 h-2 bg-red-400 rounded-full mr-3 mt-2 flex-shrink-0"></span>
+              <span>{feature}</span>
             </li>
           ))}
         </ul>
+        <Link
+          href="/contact#contact-form"
+          className="inline-flex items-center text-red-400 group"
+        >
+          <span>Mehr erfahren</span>
+          <svg className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
+        </Link>
       </div>
-
     </div>
   );
 };
@@ -49,8 +63,8 @@ export default function ServicesPage() {
       description: 'Individuelles Training, maßgeschneidert auf Ihre persönlichen Ziele.',
       image: '/images/services/personal-training.jpg',
       features: [
+        'Professionelles Coaching und Beratung',
         'Individueller Trainingsplan',
-        'Trainingsplanung',
         'Fortschrittskontrolle',
         'Flexible Terminplanung',
       ],
@@ -62,7 +76,7 @@ export default function ServicesPage() {
       features: [
         'Kleine Gruppengrößen',
         'Verschiedene Fitnesslevel',
-        'Team-Motivation',
+        'Teamtraining',
         'Flexible Zeiten',
       ],
     },
@@ -79,7 +93,7 @@ export default function ServicesPage() {
     },
     {
       title: 'Selbstverteidigung',
-      description: 'Effektive Techniken für mehr Sicherheit im Alltag.',
+      description: 'Effektive Techniken für mehr Selbstvertrauen im Alltag und Sicherheit in Konfliktsituationen.',
       image: '/images/services/self-defense.jpg',
       features: [
         'Grundtechniken',
@@ -91,43 +105,55 @@ export default function ServicesPage() {
   ];
 
   return (
-    <main className="min-h-screen pt-16">
-      {/* Hero Section */}
-      <section className="bg-gradient-to-r from-black to-red-800 text-white py-20">
-        <div className="max-w-6xl mx-auto px-4">
-          <h1 className="text-4xl md:text-5xl font-bold mb-6">Unsere Leistungen</h1>
-          <p className="text-xl text-gray-200 max-w-2xl">
-            Entdecken Sie unsere vielfältigen Trainingsangebote und finden Sie das perfekte Programm
-            für Ihre Fitnessziele.
-          </p>
+    <main className="min-h-screen bg-neutral-50 text-neutral-900">
+      {/* Hero Section with skewed background */}
+      <div className="relative py-28 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-r from-neutral-900 to-red-800 skew-y-[-3deg] origin-top-left transform-gpu -translate-y-16"></div>
+        <div className="relative z-10 max-w-6xl mx-auto px-6">
+          <div className="animate-fade-in">
+            <h1 className="text-4xl md:text-6xl font-bold mb-6 text-white tracking-tight">
+              Unsere Leistungen
+            </h1>
+            <div className="w-24 h-1 bg-red-400 mb-8"></div>
+            <p className="text-xl text-white/90 max-w-2xl leading-relaxed">
+              Entdecken Sie unsere vielfältigen Trainingsangebote und finden Sie das perfekte Programm
+              für Ihre Fitnessziele.
+            </p>
+          </div>
         </div>
-      </section>
+      </div>
 
-      {/* Services Grid */}
-      <section className="max-w-6xl mx-auto px-4 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+      {/* Services Grid with improved spacing */}
+      <section className="max-w-6xl mx-auto px-6 py-24">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
           {services.map((service, index) => (
             <ServiceCard key={index} service={service} />
           ))}
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="bg-gray-900 text-white py-16">
-        <div className="max-w-6xl mx-auto px-4 text-center">
-          <h2 className="text-3xl font-bold mb-8">Bereit für den nächsten Schritt?</h2>
-          <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
+      {/* CTA Section with perspective design */}
+      <div className="relative py-24 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-red-800 to-neutral-900 skew-y-[-3deg] origin-top-right transform-gpu -translate-y-16"></div>
+        <div className="relative z-10 max-w-6xl mx-auto px-6 text-center">
+          <h2 className="text-3xl md:text-5xl font-bold mb-8 text-white">
+            Bereit für den nächsten Schritt?
+          </h2>
+          <p className="text-xl mb-12 max-w-2xl mx-auto text-white/80">
             Vereinbaren Sie jetzt ein kostenloses Erstgespräch und lassen Sie uns gemeinsam Ihre
             Fitnessziele erreichen.
           </p>
-          <Link
+          <Link 
             href="/contact#contact-form"
-            className="inline-block bg-red-600 text-white px-8 py-3 rounded-lg hover:bg-red-700 transition-colors"
+            className="inline-flex items-center bg-white hover:bg-neutral-100 text-red-600 px-8 py-4 rounded-lg text-lg font-medium transition-all duration-300 shadow-xl group"
           >
-            Kontakt aufnehmen
+            <span>Kontakt aufnehmen</span>
+            <svg className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+            </svg>
           </Link>
         </div>
-      </section>
+      </div>
     </main>
   );
 }
