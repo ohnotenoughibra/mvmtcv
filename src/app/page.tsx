@@ -22,8 +22,8 @@ export default function Home() {
       // Set onload before setting src
       img.onload = () => setHeroLoaded(true);
       img.src = isMobileView 
-        ? '/images/hero-mobile-optimized.jpg' 
-        : '/images/hero-desktop-optimized.jpg';
+        ? '/images/hero-mobile.jpg' // Use your existing mobile hero image
+        : '/images/hero-desktop.jpg'; // Use your existing desktop hero image
     };
     
     preloadHeroImage();
@@ -76,7 +76,7 @@ export default function Home() {
         {/* We don't use an img tag until it's loaded to prevent showing broken images */}
         {heroLoaded && (
           <img
-            src={isMobile ? '/images/hero-mobile-optimized.jpg' : '/images/hero-desktop-optimized.jpg'}
+            src={isMobile ? '/images/hero-mobile.jpg' : '/images/hero-desktop.jpg'}
             alt="Movement Cave Hero"
             className="absolute inset-0 w-full h-full object-cover scale-[1.02] transform-gpu animate-fade-in"
           />
@@ -164,7 +164,7 @@ export default function Home() {
         </div>
       </div>
 
-      {/* About Section with staggered design - Lazy-loaded image */}
+      {/* About Section with staggered design - Using existing image path */}
       <div className="py-24 bg-white">
         <div className="max-w-6xl mx-auto px-6">
           <div className="grid md:grid-cols-2 gap-16 items-center">
@@ -172,12 +172,18 @@ export default function Home() {
               {/* Background placeholder */}
               <div className="absolute inset-0 bg-neutral-700 animate-pulse"></div>
               
-              {/* Optimized image with lazy loading */}
+              {/* Image with lazy loading */}
               <img
-                src="/images/about-gym-small.jpg" // Use a smaller optimized version
+                src="/images/about-gym.jpg" // Use your existing image path
                 alt="Movement Cave Gym"
                 loading="lazy" // Only load when near viewport
                 className="absolute inset-0 w-full h-full object-cover hover:scale-105 transition-transform duration-700"
+                onLoad={(e) => {
+                  // Hide the placeholder when image loads
+                  const target = e.target as HTMLImageElement;
+                  const placeholder = target.previousElementSibling as HTMLElement;
+                  if (placeholder) placeholder.style.display = 'none';
+                }}
               />
             </div>
             <div className="order-1 md:order-2">
@@ -230,7 +236,7 @@ export default function Home() {
         </div>
       </div>
 
-      {/* Gallery Preview with modern grid and hover effects - Lazy-loaded thumbnails */}
+      {/* Gallery Preview with modern grid and hover effects - Using existing image paths */}
       <div className="py-24 bg-neutral-50">
         <div className="max-w-6xl mx-auto px-6">
           <h2 className="text-3xl md:text-4xl font-bold mb-4 text-center">
@@ -246,12 +252,18 @@ export default function Home() {
                 {/* Background placeholder */}
                 <div className="absolute inset-0 bg-neutral-800 animate-pulse"></div>
                 
-                {/* Use thumbnails instead of full-size images */}
+                {/* Use your existing image paths */}
                 <img
-                  src={`/images/gallery/thumbs/gym-${num}-thumb.jpg`} // Use thumbnail version
+                  src={`/images/gallery/gym-${num}.jpg`} // Use your existing path
                   alt={`Gym Preview ${num}`}
                   loading="lazy" // Only load when near viewport
                   className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  onLoad={(e) => {
+                    // Hide the placeholder when image loads
+                    const target = e.target as HTMLImageElement;
+                    const placeholder = target.previousElementSibling as HTMLElement;
+                    if (placeholder) placeholder.style.display = 'none';
+                  }}
                 />
                 <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
