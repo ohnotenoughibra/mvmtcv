@@ -7,7 +7,10 @@ import { useEffect, useState } from 'react';
 export default function Home() {
   // State to track viewport width for responsive behavior testing
   const [isMobile, setIsMobile] = useState<boolean>(false);
-  const [imagesLoaded, setImagesLoaded] = useState<Record<string, boolean>>({});
+  
+  // State to track loaded images - only declare it if we're actually using it
+  const [loadedImageCount, setLoadedImageCount] = useState<number>(0);
+  const totalExpectedImages = 7; // Total number of images to load
 
   // Check for mobile viewport on mount and resize
   useEffect(() => {
@@ -51,16 +54,23 @@ export default function Home() {
     }
   ];
 
-  // Function to handle image load with proper typing
-  const handleImageLoad = (type: string): void => {
-    setImagesLoaded(prev => ({
-      ...prev,
-      [type]: true
-    }));
+  // Function to handle image load - actually use the counter
+  const handleImageLoad = () => {
+    setLoadedImageCount(prev => prev + 1);
   };
+
+  // Calculate loading progress
+  const loadingProgress = Math.round((loadedImageCount / totalExpectedImages) * 100);
 
   return (
     <main className="min-h-screen bg-neutral-50 text-neutral-900 selection:bg-red-600 selection:text-white">
+      {/* Optional loading indicator */}
+      {loadingProgress < 100 && (
+        <div className="fixed top-0 left-0 right-0 z-50 bg-white shadow-md">
+          <div className="h-1 bg-red-600" style={{ width: `${loadingProgress}%` }}></div>
+        </div>
+      )}
+      
       {/* Hero Section - Full height with parallax effect */}
       <div className="relative h-screen overflow-hidden">
         {/* Mobile Hero Image - With direct visibility control and simplified placeholder */}
@@ -69,7 +79,7 @@ export default function Home() {
           <img
             src="/images/hero-mobile.jpg"
             alt="Movement Cave Hero"
-            onLoad={() => handleImageLoad('mobile')}
+            onLoad={handleImageLoad}
             className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 transform-gpu"
           />
         </div>
@@ -80,7 +90,7 @@ export default function Home() {
           <img
             src="/images/hero-desktop.jpg"
             alt="Movement Cave Hero"
-            onLoad={() => handleImageLoad('desktop')}
+            onLoad={handleImageLoad}
             className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 transform-gpu"
           />
         </div>
@@ -176,7 +186,7 @@ export default function Home() {
               <img
                 src="/images/about-gym.jpg"
                 alt="Movement Cave Gym"
-                onLoad={() => handleImageLoad('about')}
+                onLoad={handleImageLoad}
                 className="absolute inset-0 w-full h-full object-cover hover:scale-105 transition-transform duration-700"
               />
             </div>
@@ -247,7 +257,7 @@ export default function Home() {
                 <img
                   src={`/images/gallery/gym-${num}.jpg`}
                   alt={`Gym Preview ${num}`}
-                  onLoad={() => handleImageLoad(`gallery-${num}`)}
+                  onLoad={handleImageLoad}
                   className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
