@@ -7,24 +7,33 @@ import { useEffect, useState } from 'react';
 export default function Home() {
   // State to track viewport width for responsive behavior testing
   const [isMobile, setIsMobile] = useState<boolean>(false);
-  
-  // State to track loaded images - only declare it if we're actually using it
-  const [loadedImageCount, setLoadedImageCount] = useState<number>(0);
-  const totalExpectedImages = 7; // Total number of images to load
+  // Track if the hero image has loaded
+  const [heroLoaded, setHeroLoaded] = useState<boolean>(false);
+  const [otherImagesLoaded, setOtherImagesLoaded] = useState<number>(0);
 
   // Check for mobile viewport on mount and resize
   useEffect(() => {
-    // Check immediately for mobile
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768);
+    // Preload the hero image based on screen size
+    const preloadHeroImage = () => {
+      const isMobileView = window.innerWidth < 768;
+      setIsMobile(isMobileView);
+      
+      // Create image object to preload the appropriate hero
+      const img = new Image();
+      // Set onload before setting src
+      img.onload = () => setHeroLoaded(true);
+      img.src = isMobileView 
+        ? '/images/hero-mobile-optimized.jpg' 
+        : '/images/hero-desktop-optimized.jpg';
     };
-    checkMobile();
+    
+    preloadHeroImage();
     
     // Add event listener for window resize
-    window.addEventListener('resize', checkMobile);
+    window.addEventListener('resize', preloadHeroImage);
     
     // Cleanup
-    return () => window.removeEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', preloadHeroImage);
   }, []);
 
   const services = [
@@ -54,48 +63,32 @@ export default function Home() {
     }
   ];
 
-  // Function to handle image load - actually use the counter
+  // Function to handle other images loading
   const handleImageLoad = () => {
-    setLoadedImageCount(prev => prev + 1);
+    setOtherImagesLoaded(prev => prev + 1);
   };
-
-  // Calculate loading progress
-  const loadingProgress = Math.round((loadedImageCount / totalExpectedImages) * 100);
 
   return (
     <main className="min-h-screen bg-neutral-50 text-neutral-900 selection:bg-red-600 selection:text-white">
-      {/* Optional loading indicator */}
-      {loadingProgress < 100 && (
-        <div className="fixed top-0 left-0 right-0 z-50 bg-white shadow-md">
-          <div className="h-1 bg-red-600" style={{ width: `${loadingProgress}%` }}></div>
-        </div>
-      )}
-      
-      {/* Hero Section - Full height with parallax effect */}
+      {/* Hero Section with optimized progressive loading */}
       <div className="relative h-screen overflow-hidden">
-        {/* Mobile Hero Image - With direct visibility control and simplified placeholder */}
-        <div className={`absolute inset-0 scale-[1.02] ${isMobile ? 'block' : 'hidden'}`}>
-          <div className="absolute inset-0 bg-neutral-800 animate-pulse" /> {/* Animated placeholder */}
-          <img
-            src="/images/hero-mobile.jpg"
-            alt="Movement Cave Hero"
-            onLoad={handleImageLoad}
-            className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 transform-gpu"
-          />
-        </div>
+        {/* Gradient placeholder that shows immediately */}
+        <div 
+          className="absolute inset-0 bg-gradient-to-b from-red-800 to-neutral-900" 
+          style={{ opacity: heroLoaded ? 0 : 1, transition: 'opacity 0.7s ease-in' }}
+        />
         
-        {/* Desktop Hero Image - With direct visibility control and simplified placeholder */}
-        <div className={`absolute inset-0 scale-[1.02] ${!isMobile ? 'block' : 'hidden'}`}>
-          <div className="absolute inset-0 bg-neutral-800 animate-pulse" /> {/* Animated placeholder */}
+        {/* Hero Image that fades in when loaded */}
+        {/* We don't use an img tag until it's loaded to prevent showing broken images */}
+        {heroLoaded && (
           <img
-            src="/images/hero-desktop.jpg"
+            src={isMobile ? '/images/hero-mobile-optimized.jpg' : '/images/hero-desktop-optimized.jpg'}
             alt="Movement Cave Hero"
-            onLoad={handleImageLoad}
-            className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 transform-gpu"
+            className="absolute inset-0 w-full h-full object-cover scale-[1.02] transform-gpu animate-fade-in"
           />
-        </div>
+        )}
         
-        {/* Gradient overlay with softer blend */}
+        {/* Gradient overlay with softer blend - always visible */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent z-10" />
         
         {/* Hero Content with animated fade-in */}
@@ -177,16 +170,20 @@ export default function Home() {
         </div>
       </div>
 
-      {/* About Section with staggered design - Optimized Image */}
+      {/* About Section with staggered design - Lazy-loaded image */}
       <div className="py-24 bg-white">
         <div className="max-w-6xl mx-auto px-6">
           <div className="grid md:grid-cols-2 gap-16 items-center">
             <div className="relative rounded-2xl overflow-hidden aspect-square md:aspect-auto md:h-[550px] shadow-2xl order-2 md:order-1">
+              {/* Background placeholder */}
               <div className="absolute inset-0 bg-neutral-700 animate-pulse"></div>
+              
+              {/* Optimized image with lazy loading */}
               <img
-                src="/images/about-gym.jpg"
+                src="/images/about-gym-small.jpg" // Use a smaller optimized version
                 alt="Movement Cave Gym"
                 onLoad={handleImageLoad}
+                loading="lazy" // Only load when near viewport
                 className="absolute inset-0 w-full h-full object-cover hover:scale-105 transition-transform duration-700"
               />
             </div>
@@ -240,7 +237,7 @@ export default function Home() {
         </div>
       </div>
 
-      {/* Gallery Preview with modern grid and hover effects - Optimized Images */}
+      {/* Gallery Preview with modern grid and hover effects - Lazy-loaded thumbnails */}
       <div className="py-24 bg-neutral-50">
         <div className="max-w-6xl mx-auto px-6">
           <h2 className="text-3xl md:text-4xl font-bold mb-4 text-center">
@@ -253,11 +250,15 @@ export default function Home() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             {[1, 2, 3, 4].map((num) => (
               <div key={num} className="group relative aspect-square rounded-xl overflow-hidden cursor-pointer shadow-md">
+                {/* Background placeholder */}
                 <div className="absolute inset-0 bg-neutral-800 animate-pulse"></div>
+                
+                {/* Use thumbnails instead of full-size images */}
                 <img
-                  src={`/images/gallery/gym-${num}.jpg`}
+                  src={`/images/gallery/thumbs/gym-${num}-thumb.jpg`} // Use thumbnail version
                   alt={`Gym Preview ${num}`}
                   onLoad={handleImageLoad}
+                  loading="lazy" // Only load when near viewport
                   className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
