@@ -1,8 +1,7 @@
 'use client';
 
-import Image from 'next/image';
 import Link from 'next/link';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 interface Service {
   title: string;
@@ -11,7 +10,7 @@ interface Service {
   features: string[];
 }
 
-// ServiceCard Component (Modernized with improved image loading)
+// ServiceCard Component with standard img tag instead of Next.js Image
 const ServiceCard = ({ service }: { service: Service }) => {
   const [imageLoaded, setImageLoaded] = useState(false);
 
@@ -22,14 +21,12 @@ const ServiceCard = ({ service }: { service: Service }) => {
         {/* Dark background placeholder while image loads */}
         <div className="absolute inset-0 bg-neutral-700"></div>
         
-        <Image
+        {/* Using standard img tag for better performance */}
+        <img
           src={service.image}
           alt={service.title}
-          fill
-          sizes="(max-width: 768px) 100vw, 50vw"
-          onLoadingComplete={() => setImageLoaded(true)}
-          loading="eager" // Force eager loading for visibility
-          className={`object-cover group-hover:scale-105 transition-transform duration-700 ${
+          onLoad={() => setImageLoaded(true)}
+          className={`absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ${
             imageLoaded ? 'opacity-100' : 'opacity-0'
           }`}
         />
@@ -67,6 +64,8 @@ const ServiceCard = ({ service }: { service: Service }) => {
 
 // ServicesPage Component with improved image handling
 export default function ServicesPage() {
+  const [imagesLoaded, setImagesLoaded] = useState(0);
+  
   const services = [
     {
       title: 'Personal Training',
@@ -114,16 +113,8 @@ export default function ServicesPage() {
     },
   ];
 
-  // Fixed preloading function that uses the browser's Image constructor properly
-  useEffect(() => {
-    // Only run in browser environment
-    if (typeof window !== 'undefined') {
-      services.forEach(service => {
-        const imgLoader = document.createElement('img');
-        imgLoader.src = service.image;
-      });
-    }
-  }, []);
+  // Calculate loading progress
+  const loadingProgress = Math.round((imagesLoaded / services.length) * 100);
 
   return (
     <main className="min-h-screen bg-neutral-50 text-neutral-900">
@@ -143,11 +134,33 @@ export default function ServicesPage() {
         </div>
       </div>
 
+      {/* Loading indicator */}
+      {loadingProgress < 100 && (
+        <div className="max-w-6xl mx-auto px-6 py-4">
+          <div className="w-full bg-neutral-200 rounded-full h-2.5">
+            <div 
+              className="bg-red-600 h-2.5 rounded-full transition-all duration-300 ease-out"
+              style={{ width: `${loadingProgress}%` }}
+            ></div>
+          </div>
+          <p className="text-sm text-neutral-500 mt-2 text-center">Bilder werden geladen ({loadingProgress}%)</p>
+        </div>
+      )}
+
       {/* Services Grid with improved spacing */}
-      <section className="max-w-6xl mx-auto px-6 py-24">
+      <section className="max-w-6xl mx-auto px-6 py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
           {services.map((service, index) => (
-            <ServiceCard key={index} service={service} />
+            <div key={index} className="relative">
+              {/* Preload images in hidden elements and track loading progress */}
+              <img 
+                src={service.image} 
+                alt="" 
+                className="hidden"
+                onLoad={() => setImagesLoaded(prev => prev + 1)} 
+              />
+              <ServiceCard service={service} />
+            </div>
           ))}
         </div>
       </section>

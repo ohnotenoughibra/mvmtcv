@@ -5,17 +5,39 @@ import Link from 'next/link';
 import { Dumbbell, Users, Shield, Notebook } from 'lucide-react';
 import { useEffect, useState } from 'react';
 
+// Function to preload images with proper TypeScript typing
+const preloadImages = (imagePaths: string[]): void => {
+  if (typeof window === 'undefined') return;
+  
+  imagePaths.forEach((path: string) => {
+    const imgLoader = document.createElement('img');
+    imgLoader.src = path;
+  });
+};
+
 export default function Home() {
   // State to track viewport width for responsive behavior testing
   const [isMobile, setIsMobile] = useState(false);
+  const [imagesLoaded, setImagesLoaded] = useState<Record<string, boolean>>({});
 
-  // Update mobile state on mount and window resize
+  // Preload all images when component mounts
   useEffect(() => {
+    const imagesToPreload: string[] = [
+      '/images/hero-mobile.jpg',
+      '/images/hero-desktop.jpg',
+      '/images/about-gym.jpg',
+      '/images/gallery/gym-1.jpg',
+      '/images/gallery/gym-2.jpg',
+      '/images/gallery/gym-3.jpg',
+      '/images/gallery/gym-4.jpg'
+    ];
+    
+    preloadImages(imagesToPreload);
+    
+    // Check immediately for mobile
     const checkMobile = () => {
       setIsMobile(window.innerWidth < 768);
     };
-    
-    // Check immediately
     checkMobile();
     
     // Add event listener for window resize
@@ -52,9 +74,12 @@ export default function Home() {
     }
   ];
 
-  // Function to handle image load
-  const handleImageLoad = (type: string) => {
-    console.log(`Image loaded: ${type}`);
+  // Function to handle image load with proper typing
+  const handleImageLoad = (type: string): void => {
+    setImagesLoaded(prev => ({
+      ...prev,
+      [type]: true
+    }));
   };
 
   return (
@@ -63,31 +88,23 @@ export default function Home() {
       <div className="relative h-screen overflow-hidden">
         {/* Mobile Hero Image - With direct visibility control and simplified placeholder */}
         <div className={`absolute inset-0 scale-[1.02] ${isMobile ? 'block' : 'hidden'}`}>
-          <div className="absolute inset-0 bg-neutral-800" /> {/* Placeholder background */}
-          <Image
+          <div className="absolute inset-0 bg-neutral-800 animate-pulse" /> {/* Animated placeholder */}
+          <img
             src="/images/hero-mobile.jpg"
             alt="Movement Cave Hero"
-            fill
-            priority={true}
-            sizes="100vw"
-            quality={85}
-            onLoadingComplete={() => handleImageLoad('mobile')}
-            className="object-cover transition-transform duration-1000 transform-gpu"
+            onLoad={() => handleImageLoad('mobile')}
+            className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 transform-gpu"
           />
         </div>
         
         {/* Desktop Hero Image - With direct visibility control and simplified placeholder */}
         <div className={`absolute inset-0 scale-[1.02] ${!isMobile ? 'block' : 'hidden'}`}>
-          <div className="absolute inset-0 bg-neutral-800" /> {/* Placeholder background */}
-          <Image
+          <div className="absolute inset-0 bg-neutral-800 animate-pulse" /> {/* Animated placeholder */}
+          <img
             src="/images/hero-desktop.jpg"
             alt="Movement Cave Hero"
-            fill
-            priority={true}
-            sizes="100vw"
-            quality={85}
-            onLoadingComplete={() => handleImageLoad('desktop')}
-            className="object-cover transition-transform duration-1000 transform-gpu"
+            onLoad={() => handleImageLoad('desktop')}
+            className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 transform-gpu"
           />
         </div>
         
@@ -178,16 +195,12 @@ export default function Home() {
         <div className="max-w-6xl mx-auto px-6">
           <div className="grid md:grid-cols-2 gap-16 items-center">
             <div className="relative rounded-2xl overflow-hidden aspect-square md:aspect-auto md:h-[550px] shadow-2xl order-2 md:order-1">
-              <Image
+              <div className="absolute inset-0 bg-neutral-700 animate-pulse"></div>
+              <img
                 src="/images/about-gym.jpg"
                 alt="Movement Cave Gym"
-                fill
-                loading="lazy"
-                sizes="(max-width: 768px) 100vw, 50vw"
-                quality={80}
-                placeholder="blur"
-                blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAUDBAQEAwUEBAQFBQUGBwwIBwcHBw8LCwkMEQ8SEhEPERETFhwXExQaFRERGCEYGh0dHx8fExciJCIeJBweHx7/2wBDAQUFBQcGBw4ICA4eFBEUHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh7/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAb/xAAhEAACAgEDBQAAAAAAAAAAAAABAgMRBAASITFBUWGR/8QAFQEBAQAAAAAAAAAAAAAAAAAAAQL/xAAYEQEAAwEAAAAAAAAAAAAAAAABAAIRIf/aAAwDAQACEQMRAD8AcZDkdNJFLGVQB3brSCvd0O/9rlJ45FjYqwlK1YB4N++upM4xrFimlrEUY27VNn5pSlAb1ztbR2//2Q=="
-                className="object-cover hover:scale-105 transition-transform duration-700"
+                onLoad={() => handleImageLoad('about')}
+                className="absolute inset-0 w-full h-full object-cover hover:scale-105 transition-transform duration-700"
               />
             </div>
             <div className="order-1 md:order-2">
@@ -253,16 +266,12 @@ export default function Home() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             {[1, 2, 3, 4].map((num) => (
               <div key={num} className="group relative aspect-square rounded-xl overflow-hidden cursor-pointer shadow-md">
-                <div className="absolute inset-0 bg-neutral-800"></div> {/* Placeholder background */}
-                <Image
+                <div className="absolute inset-0 bg-neutral-800 animate-pulse"></div>
+                <img
                   src={`/images/gallery/gym-${num}.jpg`}
                   alt={`Gym Preview ${num}`}
-                  fill
-                  loading="eager" // Changed from lazy to eager
-                  sizes="(max-width: 640px) 50vw, (max-width: 768px) 33vw, 25vw"
-                  quality={75}
-                  onLoadingComplete={() => handleImageLoad(`gallery-${num}`)}
-                  className="object-cover transition-transform duration-700 group-hover:scale-110"
+                  onLoad={() => handleImageLoad(`gallery-${num}`)}
+                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
