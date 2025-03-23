@@ -9,7 +9,6 @@ export default function Home() {
   const [isMobile, setIsMobile] = useState<boolean>(false);
   // Track if the hero image has loaded
   const [heroLoaded, setHeroLoaded] = useState<boolean>(false);
-  const [otherImagesLoaded, setOtherImagesLoaded] = useState<number>(0);
 
   // Check for mobile viewport on mount and resize
   useEffect(() => {
@@ -62,11 +61,6 @@ export default function Home() {
       slug: 'selbstverteidigung'
     }
   ];
-
-  // Function to handle other images loading
-  const handleImageLoad = () => {
-    setOtherImagesLoaded(prev => prev + 1);
-  };
 
   return (
     <main className="min-h-screen bg-neutral-50 text-neutral-900 selection:bg-red-600 selection:text-white">
@@ -182,7 +176,6 @@ export default function Home() {
               <img
                 src="/images/about-gym-small.jpg" // Use a smaller optimized version
                 alt="Movement Cave Gym"
-                onLoad={handleImageLoad}
                 loading="lazy" // Only load when near viewport
                 className="absolute inset-0 w-full h-full object-cover hover:scale-105 transition-transform duration-700"
               />
@@ -257,7 +250,6 @@ export default function Home() {
                 <img
                   src={`/images/gallery/thumbs/gym-${num}-thumb.jpg`} // Use thumbnail version
                   alt={`Gym Preview ${num}`}
-                  onLoad={handleImageLoad}
                   loading="lazy" // Only load when near viewport
                   className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                 />
