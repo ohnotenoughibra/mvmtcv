@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { ChevronLeft, ChevronRight, X, Search } from 'lucide-react';
 
 export default function GalleryPage() {
@@ -36,24 +36,24 @@ export default function GalleryPage() {
     }
   ];
 
-  // Navigation functions
-  const nextImage = () => {
+  // Memoized navigation functions to prevent unnecessary re-renders
+  const nextImage = useCallback(() => {
     setSelectedImage(current => {
       if (current === null) return 0;
       return current === images.length - 1 ? 0 : current + 1;
     });
     setIsModalLoading(true);
-  };
+  }, [images.length]);
 
-  const previousImage = () => {
+  const previousImage = useCallback(() => {
     setSelectedImage(current => {
       if (current === null) return 0;
       return current === 0 ? images.length - 1 : current - 1;
     });
     setIsModalLoading(true);
-  };
+  }, [images.length]);
 
-  // Handle keyboard navigation
+  // Handle keyboard navigation with proper dependencies
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (selectedImage === null) return;
@@ -80,7 +80,7 @@ export default function GalleryPage() {
       window.removeEventListener('keydown', handleKeyDown);
       document.body.style.overflow = 'auto';
     };
-  }, [selectedImage, images.length]);
+  }, [selectedImage, nextImage, previousImage]); // Fixed dependencies list
 
   // Track image load status
   const handleImageLoad = (index: number) => {
@@ -90,7 +90,7 @@ export default function GalleryPage() {
     }));
   };
 
-  // Calculate loading progress
+  // Calculate loading progress - actively using loadedImages
   const loadedImagesCount = Object.values(loadedImages).filter(Boolean).length;
   const loadingProgress = Math.round((loadedImagesCount / images.length) * 100);
 
@@ -112,7 +112,7 @@ export default function GalleryPage() {
         </div>
       </div>
 
-      {/* Loading indicator */}
+      {/* Loading indicator - actively using loadingProgress */}
       {loadingProgress < 100 && (
         <div className="max-w-6xl mx-auto px-6 py-4">
           <div className="w-full bg-neutral-200 rounded-full h-2.5">
