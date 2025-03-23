@@ -1,59 +1,38 @@
 'use client';
 
-import { useState, useRef } from 'react';
+import { useState } from 'react';
 import { Mail, Phone, MapPin, MessageCircle } from 'lucide-react';
 
 export default function ContactPage() {
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState('idle');
-  const formRef = useRef(null);
-  
-  // Improved form submission with better error handling and feedback
-  const handleSubmit = async (e: { preventDefault: () => void; currentTarget: any; }) => {
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     
-    // Reset previous status
-    setSubmitStatus('idle');
     setIsSubmitting(true);
     
     try {
       const form = e.currentTarget;
       const formData = new FormData(form);
       
-      // Convert FormData to URL encoded string
       const params = new URLSearchParams();
       formData.forEach((value, key) => {
         params.append(key, value.toString());
       });
       
-      // Add form name for Netlify
-      params.append('form-name', 'contact');
-      
-      // Submit with timeout to prevent hanging requests
-      const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), 8000);
-      
-      const response = await fetch('/', {
+      await fetch('/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: params.toString(),
-        signal: controller.signal
+        body: params.toString()
       });
-      
-      clearTimeout(timeoutId);
-      
-      if (!response.ok) {
-        throw new Error(`Form submission failed: ${response.status}`);
-      }
       
       form.reset();
       setSubmitStatus('success');
       
       // Auto-clear success message after 5 seconds
       setTimeout(() => {
-        if (setSubmitStatus) {
-          setSubmitStatus('idle');
-        }
+        setSubmitStatus('idle');
       }, 5000);
       
     } catch (error) {
@@ -149,7 +128,6 @@ export default function ContactPage() {
             <div className="w-16 h-1 bg-red-600 mb-8"></div>
             
             <form 
-              ref={formRef}
               name="contact" 
               method="POST" 
               data-netlify="true"

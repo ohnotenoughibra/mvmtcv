@@ -1,39 +1,16 @@
 'use client';
 
-import Image from 'next/image';
 import Link from 'next/link';
 import { Dumbbell, Users, Shield, Notebook } from 'lucide-react';
 import { useEffect, useState } from 'react';
 
-// Function to preload images with proper TypeScript typing
-const preloadImages = (imagePaths: string[]): void => {
-  if (typeof window === 'undefined') return;
-  
-  imagePaths.forEach((path: string) => {
-    const imgLoader = document.createElement('img');
-    imgLoader.src = path;
-  });
-};
-
 export default function Home() {
   // State to track viewport width for responsive behavior testing
-  const [isMobile, setIsMobile] = useState(false);
+  const [isMobile, setIsMobile] = useState<boolean>(false);
   const [imagesLoaded, setImagesLoaded] = useState<Record<string, boolean>>({});
 
-  // Preload all images when component mounts
+  // Check for mobile viewport on mount and resize
   useEffect(() => {
-    const imagesToPreload: string[] = [
-      '/images/hero-mobile.jpg',
-      '/images/hero-desktop.jpg',
-      '/images/about-gym.jpg',
-      '/images/gallery/gym-1.jpg',
-      '/images/gallery/gym-2.jpg',
-      '/images/gallery/gym-3.jpg',
-      '/images/gallery/gym-4.jpg'
-    ];
-    
-    preloadImages(imagesToPreload);
-    
     // Check immediately for mobile
     const checkMobile = () => {
       setIsMobile(window.innerWidth < 768);

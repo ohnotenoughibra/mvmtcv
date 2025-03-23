@@ -1,10 +1,25 @@
 'use client';
 
-import Image from 'next/image';
 import Link from 'next/link';
+import Image from 'next/image';
 import { CheckCircle, GraduationCap, Trophy } from 'lucide-react';
+import { useState } from 'react';
 
 export default function AboutPage() {
+  // Track image loading states
+  const [imagesLoaded, setImagesLoaded] = useState<Record<string, boolean>>({
+    'about-gym': false,
+    'trainer': false
+  });
+
+  // Function to handle image load
+  const handleImageLoad = (imageId: string): void => {
+    setImagesLoaded(prev => ({
+      ...prev,
+      [imageId]: true
+    }));
+  };
+
   const education = [
     {
       title: 'BSc Sportwissenschaft',
@@ -61,16 +76,19 @@ export default function AboutPage() {
             </p>
           </div>
           <div className="relative aspect-square md:aspect-auto md:h-[500px] rounded-2xl overflow-hidden shadow-2xl">
+            {/* Placeholder while image loads */}
+            <div className="absolute inset-0 bg-neutral-700 animate-pulse"
+                 style={{ display: imagesLoaded['about-gym'] ? 'none' : 'block' }}></div>
+            
+            {/* Image with next/image */}
             <Image
               src="/images/about-gym.jpg"
               alt="Movement Cave Studio"
               fill
-              loading="lazy"
               sizes="(max-width: 768px) 100vw, 50vw"
-              quality={80}
-              placeholder="blur"
-              blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAUDBAQEAwUEBAQFBQUGBwwIBwcHBw8LCwkMEQ8SEhEPERETFhwXExQaFRERGCEYGh0dHx8fExciJCIeJBweHx7/2wBDAQUFBQcGBw4ICA4eFBEUHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh7/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAb/xAAhEAACAgEDBQAAAAAAAAAAAAABAgMRBAASITFBUWGR/8QAFQEBAQAAAAAAAAAAAAAAAAAAAQL/xAAYEQEAAwEAAAAAAAAAAAAAAAABAAIRIf/aAAwDAQACEQMRAD8AcZDkdNJFLGVQB3brSCvd0O/9rlJ45FjYqwlK1YB4N++upM4xrFimlrEUY27VNn5pSlAb1ztbR2//2Q=="
+              priority
               className="object-cover hover:scale-105 transition-transform duration-700"
+              onLoadingComplete={() => handleImageLoad('about-gym')}
             />
           </div>
         </div>
@@ -86,16 +104,18 @@ export default function AboutPage() {
             {/* Image column - kept separate from text content */}
             <div className="w-full h-full">
               <div className="relative aspect-square md:aspect-[3/4] w-full h-auto rounded-2xl overflow-hidden shadow-2xl">
+                {/* Placeholder while image loads */}
+                <div className="absolute inset-0 bg-neutral-700 animate-pulse"
+                     style={{ display: imagesLoaded['trainer'] ? 'none' : 'block' }}></div>
+                
+                {/* Image with next/image */}
                 <Image
                   src="/images/trainer.jpg"
                   alt="Clemens Pichler"
                   fill
-                  loading="lazy"
                   sizes="(max-width: 768px) 100vw, 50vw"
-                  quality={80}
-                  placeholder="blur"
-                  blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAUDBAQEAwUEBAQFBQUGBwwIBwcHBw8LCwkMEQ8SEhEPERETFhwXExQaFRERGCEYGh0dHx8fExciJCIeJBweHx7/2wBDAQUFBQcGBw4ICA4eFBEUHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh7/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAb/xAAhEAACAgEDBQAAAAAAAAAAAAABAgMRBAASITFBUWGR/8QAFQEBAQAAAAAAAAAAAAAAAAAAAQL/xAAYEQEAAwEAAAAAAAAAAAAAAAABAAIRIf/aAAwDAQACEQMRAD8AcZDkdNJFLGVQB3brSCvd0O/9rlJ45FjYqwlK1YB4N++upM4xrFimlrEUY27VNn5pSlAb1ztbR2//2Q=="
                   className="object-cover hover:scale-105 transition-transform duration-700"
+                  onLoadingComplete={() => handleImageLoad('trainer')}
                 />
               </div>
             </div>

@@ -64,9 +64,9 @@ const ServiceCard = ({ service }: { service: Service }) => {
 
 // ServicesPage Component with improved image handling
 export default function ServicesPage() {
-  const [imagesLoaded, setImagesLoaded] = useState(0);
+  const [imagesLoaded, setImagesLoaded] = useState<number>(0);
   
-  const services = [
+  const services: Service[] = [
     {
       title: 'Personal Training',
       description: 'Individuelles Training, maßgeschneidert auf deine persönlichen Ziele.',

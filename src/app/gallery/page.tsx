@@ -1,7 +1,6 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import Image from 'next/image';
 import { ChevronLeft, ChevronRight, X, Search } from 'lucide-react';
 
 export default function GalleryPage() {
@@ -163,7 +162,7 @@ export default function GalleryPage() {
       {selectedImage !== null && (
         <div 
           className="fixed inset-0 bg-black/95 z-50 flex items-center justify-center"
-          onClick={(e) => {
+          onClick={(e: React.MouseEvent<HTMLDivElement>) => {
             if (e.target === e.currentTarget) setSelectedImage(null);
           }}
         >
